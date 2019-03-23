@@ -1,5 +1,4 @@
 ![image](./images/icon.png)
-s
 # vscode-Vyper
 
 Ethereum Vyper language support for Visual Studio Code
