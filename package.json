@@ -107,7 +107,6 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
         "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
     },
     "dependencies": {
