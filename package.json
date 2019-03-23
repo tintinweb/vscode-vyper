@@ -1,0 +1,116 @@
+{
+    "name": "vscode-vyper",
+    "displayName": "Vyper",
+    "description": "Ethereum Vyper language support for Visual Studio Code",
+    "version": "0.0.1",
+    "keywords": [
+        "vyper",
+        "ethereum",
+        "blockchain",
+        "compiler",
+        "security"
+    ],
+    "publisher": "tintinweb",
+    "icon": "images/icon.png",
+    "engines": {
+        "vscode": "^1.20.2"
+    },
+    "categories": [
+        "Programming Languages",
+        "Snippets"
+    ],
+    "bugs": {
+        "url": "https://github.com/tintinweb/vscode-vyper/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/tintinweb/vscode-vyper"
+    },
+    "activationEvents": [
+        "onLanguage:vyper",
+        "onCommand:vyper.compileContract"
+    ],
+    "main": "./src/extension.js",
+    "contributes": {
+        "languages": [
+            {
+                "id": "vyper",
+                "aliases": [
+                    "Vyper",
+                    "vyper",
+                    "vy"
+                ],
+                "extensions": [
+                    ".vy",
+                    ".vy.py",
+                    ".v.py",
+                    ".npmvyper.py"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "vyper",
+                "scopeName": "source.vyper",
+                "path": "./syntaxes/vyper.tmLanguage.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "vyper",
+                "path": "./snippets/vyper.json"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Vyper (Ethereum)",
+            "properties": {
+                "vyper.compile.onSave": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically compile when saving and annotate code with compile results."
+                },
+                "vyper.mode.active": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/Disable all active components of this extension (emergency)."
+                },
+                "vyper.decoration.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable vyper active syntax highlighting for security."
+                },
+                "vyper.hover.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable/disable vyper tooltips/hover information."
+                },
+                "vyper.command": {
+                    "type": "string",
+                    "default": "vyper",
+                    "description": "Defines how to invoke the vyper compiler command. This can by any shell command and the vyper arguments will be passed to this command as <vyper.command> <args>. Default is to assume vyper is installed in PATH and executable as `vyper`"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "vyper.compileContract",
+                "title": "Vyper: Compile"
+            }
+        ],
+        "keybindings": [
+            {
+                "key": "cmd+alt+shift+i",
+                "command": "editor.action.inspectTMScopes"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "updateGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
+    },
+    "dependencies": {
+        "async": "^2.6.2"
+    }
+}

@@ -1,0 +1,105 @@
+{
+	".source.solidity": {
+
+        "mapping declaration":{
+            "prefix": "mapping",
+			"body": "map(${1:type}, ${2:type})"
+        },
+        "struct declaration":{
+            "prefix": "struct",
+			"body": "struct ${1:name}:\n\t${2:name}: ${3:type}$0\n\t$0\n"
+        },
+        "constructor declaration": {
+			"prefix": "__i",
+			"body": "@public\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "constructor declaration 2": {
+			"prefix": "constructor",
+			"body": "@public\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "fallback function declaration": {
+			"prefix": "fallback",
+			"body": "@public\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "default function declaration": {
+			"prefix": "__d",
+			"body": "@public\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
+		},
+        "function declaration": {
+            "prefix": "def",
+            "body": "def ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function declaration 2": {
+            "prefix": "function",
+            "body": "def ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function payable declaration": {
+            "prefix": "funcpay",
+            "body": "@public\n@payable\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function private declaration": {
+            "prefix": "funcpriv",
+            "body": "@private\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function constant declaration": {
+            "prefix": "funcconst",
+            "body": "@constant\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function nonreentrant declaration": {
+            "prefix": "funcnonrentant",
+            "body": "@public\n@nonrentant(<unique_key>)\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+		},
+        "log event call": {
+			"prefix": "log",
+            "body": "log.${1:name}(${2:variable}, ${3:variable})"
+        },
+        "emit event call": {
+			"prefix": "emit",
+            "body": "log.${1:name}(${2:variable}, ${3:variable})"
+        },
+        "event declaration": {
+			"prefix": "event",
+			"body": "${1:name}: event({${2:name}: ${3:type}, ${4:name}: ${5:type},})"
+        },
+        "if else statement": {
+			"prefix": "ifelse",
+			"body": "if ${1:condition} \n\t$2\n else: \n\t$0\n"
+		},
+        "for array statement": {
+			"prefix": "forarray",
+			"body": "for ${1:name} in range(len(${2:array})):\n\t$0\n"
+        },
+        "for statement": {
+			"prefix": "for",
+			"body": "for ${1:name} in range(${2:times}):\n\t$0\n"
+        },
+        "for start-end statement": {
+			"prefix": "for2",
+			"body": "for ${1:name} in range(${2:start}, ${3:end}):\n\t$0\n"
+        },
+        "variable declaration": {
+			"prefix": "vardec",
+			"body": "${1:name}: ${2:type}"
+        },
+        "interface implementation impl": {
+            "prefix": "implements",
+            "body": "implements: ${1:interface}"
+        },
+        "interface implementation": {
+            "prefix": "interface",
+            "body": "implements: ${1:interface}"
+        },
+        "interface declaration": {
+            "prefix": "interface declaration",
+            "body":"contract ${1:name}:\n\tdef ${1:name}(): modifying\n\tdef ${2:name}(): -> ${3:type}: constant"
+        },
+        "natspec sample": {
+            "prefix": "natspec sample",
+            "body": "\"\"\"\n@author <tintinweb ;)>\n@notice <Determine if Bugs will accept `food` to eat>\n@dev <Compares the entire string and does not rely on a hash>\n@param <food The name of a food to evaluate (in English)>\n@return <true if Bugs will eat it, false otherwise>\n\"\"\"\n"
+        },
+        "natspec": {
+            "prefix": "natspec",
+            "body": "\"\"\"\n@author ${1:author}\n@notice ${2:notice}\n@dev ${3:dev}\n@param ${4:param}\n@return ${5:return}\n\"\"\"\n\t"
+        }
+    }
+}
