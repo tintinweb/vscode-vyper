@@ -58,13 +58,14 @@ Note: Active features can be disabled bye setting `Settings` → `Vyper` → `Mo
 
 ![image](https://user-images.githubusercontent.com/2865694/54860223-6e340400-4d17-11e9-8b21-49deed0db4db.png)
 
-* creates a template constructer after selecting it from the suggestion box.
+* creates a template constructor after selecting it from the suggestion box.
 
 ![image](https://user-images.githubusercontent.com/2865694/54860229-75f3a880-4d17-11e9-93fc-e2a02ac60459.png)
 
 ## Developer Notes
 
-* use the script in `./scripts/fetch_vyper_language_spec.py` to merge the python tmlanguage spec with vyper language specifics
+* install vyper `pip3 install vyper`
+* use the script in `./scripts/fetch_vyper_language_spec.py` or run `npm run fetchGrammar` to merge the python tmlanguage spec with vyper language specifics.
 
 ## Release Notes
 

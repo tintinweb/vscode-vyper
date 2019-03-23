@@ -99,7 +99,7 @@
                 "title": "Vyper: Compile"
             }
         ],
-        "keybindings": [
+        "x-keybindings": [
             {
                 "key": "cmd+alt+shift+i",
                 "command": "editor.action.inspectTMScopes"
@@ -108,7 +108,7 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "updateGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
+        "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
     },
     "dependencies": {
         "async": "^2.6.2"
