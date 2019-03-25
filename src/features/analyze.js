@@ -2,7 +2,7 @@
  * @author github.com/tintinweb
  * @license MIT
  * 
- * compilation related parts taken from: https://github.com/trufflesuite/truffle/tree/develop/packages/truffle-compile-vyper (MIT)
+ * taken from the armlet example
  * */
 
 const armlet = require('armlet')
