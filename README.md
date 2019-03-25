@@ -23,7 +23,7 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
   * vyper location/command can be customized (default assumes `vyper` is in `PATH`) (`Settings` → `Vyper` → `Command`)
 * Integrates with [MythX](https://www.mythx.io/#faq)
   * [sign-up](https://www.mythx.io/#faq) with your ethereum address (username)
-  * set your username and password (`Settings` → `Vyper` → `MythX: Ethaddress` / `Settings` → `Vyper` → `MythX: Password`)
+  * set your username and password (`Settings` → `Vyper` → `MythX: Ethaddress` / `Settings` → `Vyper` → `MythX: Password` or `env.MYTHX_ETH_ADDRESS` / `env.MYTHX_PASSWORD`; configuration takes precedence)
   * automatically analyze for security issues when saving the file (`Settings` → `Vyper` → `Analysis: On Save`)
   
 ## Requirements
