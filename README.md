@@ -12,19 +12,23 @@ Ethereum Vyper language support for Visual Studio Code
 
 #### Active Features
 
-Note: Active features can be disabled bye setting `Settings` → `Vyper` → `Mode: Active` to `false`.
+Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mode: Active` to `false`.
 
-* Compile contracts (based on `truffle-compile-vyper`)
-  * automatically on save (`Settings` → `Vyper` → `Compile: On Save`)
-  * execute command (`cmd + shift + p` → `Vyper: Compile`)
-  * define vyper location/command (default assumes `vyper` is in `PATH`) (`Settings` → `Vyper` → `Command`)
-* Security augmented decorations (`Settings` → `Vyper` → `Decoration: Enable`)
-* Hover information (`Settings` → `Vyper` → `Hover: Enable`)
-* Code snippets for common language constructs 
-
+* Provides Security augmented decorations (`Settings` → `Vyper` → `Decoration: Enable`)
+* Provides Hover information (`Settings` → `Vyper` → `Hover: Enable`)
+* Provides Code snippets for common language constructs
+* Integrates with the vyper compiler (based on `truffle-compile-vyper`)
+  * automatically compile contracts on save (`Settings` → `Vyper` → `Compile: On Save`)
+  * compilation can be triggered by executing a vscode command (`cmd + shift + p` → `Vyper: Compile`)
+  * vyper location/command can be customized (default assumes `vyper` is in `PATH`) (`Settings` → `Vyper` → `Command`)
+* Integrates with [MythX](https://www.mythx.io/#faq)
+  * [sign-up](https://www.mythx.io/#faq) with your ethereum address (username)
+  * set your username and password (`Settings` → `Vyper` → `MythX: Ethaddress` / `Settings` → `Vyper` → `MythX: Password`)
+  * automatically analyze for security issues when saving the file (`Settings` → `Vyper` → `Analysis: On Save`)
+  
 ## Requirements
 
-* It is assumed that vyper is installed on the system (`pip install vyper`)
+* It is assumed that vyper is installed and generally available on the system (`pip install vyper`). In case vyper is not available in path or called in a virtualenv configure the vyper command in `Settings` → `Vyper` → `Command`
 
 ## Extension Settings
 
@@ -68,9 +72,13 @@ Note: Active features can be disabled bye setting `Settings` → `Vyper` → `Mo
 
 ## Release Notes
 
-### 0.0.1
+see [CHANGELOG](./CHANGELOG.md)
 
-Initial release of vscode-vyper
+### 0.0.3
+
+- mythx support (auto analyze onSave)
+- shellescape file paths
+- fixed some typos
 
 
 -----------------------------------------------------------------------------------------------------------
