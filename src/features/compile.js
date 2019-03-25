@@ -9,8 +9,10 @@ const vscode = require("vscode")
 const path = require("path");
 const exec = require("child_process").exec;
 const async = require("async");
+const mod_analyze = require("./analyze.js")
+const shellescape = require('shell-escape');
 
-var vyperCommand = "vyper";
+var vyperConfig;
 var compiler = {
     name: "vyper",
     version: null
@@ -20,7 +22,10 @@ var VYPER_ID = null;
 const VYPER_PATTERN = " **/*.{vy,v.py,vyper.py}";
 
 const compile = {};
-var compilerDiagnosticCollection;
+var diagnosticCollections = {
+    compiler:null,
+    mythx:null
+}
 
 compile.display = function(paths, options) {
     if (options.quiet !== true) {
@@ -40,7 +45,8 @@ compile.display = function(paths, options) {
 
 // Check that vyper is available, save its version
 function checkVyper(callback) {
-    exec(vyperCommand + " --version", function(err, stdout, stderr) {
+    //allow anything as command - no shellescape to even allow python -m vyper --version etc...
+    exec(`${vyperConfig.command} --version`, function(err, stdout, stderr) {
         if (err)
             return callback(`Error executing vyper:\n${stderr}`);
 
@@ -53,8 +59,7 @@ function checkVyper(callback) {
 // Execute vyper for single source file
 function execVyper(source_path, callback) {
     const formats = ["abi", "bytecode", "bytecode_runtime"];
-
-    const command = `${vyperCommand} -f${formats.join(",")} "${source_path.replace(/'/g, `'\\''`)}"`;
+    const command = `${vyperConfig.command} -f${formats.join(",")} '${shellescape([source_path])}'`;
 
     exec(command, function(err, stdout, stderr) {
         if (err)
@@ -162,7 +167,7 @@ function compileActiveFileCommand(contractFile) {
     compileActiveFile(contractFile)
         .then(
             (errormsg) => {
-                compilerDiagnosticCollection.clear();
+                diagnosticCollections.compiler.clear();
                 vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
                 let lineNr = 1; // add default errors to line 0 if not known
                 let matches = /(?:line\s+(\d+))/gm.exec(errormsg)
@@ -195,7 +200,7 @@ function compileActiveFileCommand(contractFile) {
 
                 }
                 if (errormsg) {
-                    compilerDiagnosticCollection.set(contractFile, [{
+                    diagnosticCollections.compiler.set(contractFile, [{
                         code: '',
                         message: shortmsg,
                         range: new vscode.Range(new vscode.Position(lineNr - 1, 0), new vscode.Position(lineNr - 1, 255)),
@@ -206,8 +211,46 @@ function compileActiveFileCommand(contractFile) {
                 }
             },
             (success) => {
-                compilerDiagnosticCollection.clear();
+                diagnosticCollections.compiler.clear();
+                diagnosticCollections.mythx.clear();
                 vscode.window.showInformationMessage('[Compiler success] ' + Object.keys(success).join(","))
+                //
+                let password = vyperConfig.analysis.mythx.password || process.env.MYTHX_PASSWORD
+                let ethAddress = vyperConfig.analysis.mythx.ethaddress || process.env.MYTHX_ETH_ADDRESS
+                
+                if(vyperConfig.analysis.onSave && ethAddress && password){
+                    //if mythx is configured
+                    // bytecode
+                    for (let contractKey in success) {
+                        mod_analyze.analyze.mythX(ethAddress, password, success[contractKey].bytecode)
+                        .then(result => {
+                            vscode.window.showInformationMessage('[MythX success] ' + contractKey)
+                            const util = require('util');
+                            console.debug(`${util.inspect(result.status, {depth: null})}`);
+                            console.debug(`${util.inspect(result.issues, {depth: null})}`);
+                            result.issues.forEach(function(result){
+                                //console.log(result)
+                                result.issues.forEach(function(issue){
+                                    let shortmsg = `[${issue.severity}] ${issue.swcID}: ${issue.description.head}`
+                                    let errormsg = `[${issue.severity}] ${issue.swcID}: ${issue.swcTitle}\n${issue.description.head}\n${issue.description.tail}\n\nCovered Instructions/Paths: ${result.meta.coveredInstructions}/${result.meta.coveredPaths}`
+                                    let lineNr = 1  // we did not submit any source so just pin it to line 0
+
+                                    diagnosticCollections.mythx.set(contractFile, [{
+                                        code: '',
+                                        message: shortmsg,
+                                        range: new vscode.Range(new vscode.Position(lineNr - 1, 0), new vscode.Position(lineNr - 1, 255)),
+                                        severity: mod_analyze.mythXSeverityToVSCodeSeverity[issue.severity],
+                                        source: errormsg,
+                                        relatedInformation: []
+                                    }]);
+                                })
+                            })
+                        }).catch(err => {
+                            vscode.window.showErrorMessage('[MythX error] ' + err)
+                            console.log(err)
+                        })
+                    }
+                }
             }
         )
         .catch(ex => {
@@ -218,7 +261,6 @@ function compileActiveFileCommand(contractFile) {
 
 function compileActiveFile(contractFile) {
     return new Promise((reject, resolve) => {
-        console.log("----compile init----")
         if (!contractFile && vscode.window.activeTextEditor.document.languageId !== VYPER_ID) {
             reject("Not a vyper source file")
             return;
@@ -240,11 +282,13 @@ function compileActiveFile(contractFile) {
     })
 }
 
-function init(context, type, vyperConfig) {
+function init(context, type, _vyperConfig) {
     VYPER_ID = type
-    compilerDiagnosticCollection = vscode.languages.createDiagnosticCollection('Vyper Compiler');
-    context.subscriptions.push(compilerDiagnosticCollection)
-    vyperCommand = vyperConfig.command
+    diagnosticCollections.compiler = vscode.languages.createDiagnosticCollection('Vyper Compiler');
+    context.subscriptions.push(diagnosticCollections.compiler)
+    diagnosticCollections.mythx = vscode.languages.createDiagnosticCollection('MythX Security Platform');
+    context.subscriptions.push(diagnosticCollections.mythx)
+    vyperConfig = _vyperConfig
 }
 
 module.exports = {

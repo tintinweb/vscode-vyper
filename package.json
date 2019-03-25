@@ -2,7 +2,7 @@
     "name": "vscode-vyper",
     "displayName": "Vyper",
     "description": "Ethereum Vyper language support for Visual Studio Code",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "keywords": [
         "vyper",
         "ethereum",
@@ -90,6 +90,21 @@
                     "type": "string",
                     "default": "vyper",
                     "description": "Defines how to invoke the vyper compiler command. This can by any shell command and the vyper arguments will be passed to this command as <vyper.command> <args>. Default is to assume vyper is installed in PATH and executable as `vyper`"
+                },
+                "vyper.analysis.onSave": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Automatically analyze the code when saving and annotate code with analysis results."
+                },
+                "vyper.analysis.mythx.ethaddress": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Your MythX Smart Contract Analysis Platform user account: ethAddress"
+                },
+                "vyper.analysis.mythx.password": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Your MythX Smart Contract Analysis Platform password"
                 }
             }
         },
@@ -110,6 +125,8 @@
         "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
     },
     "dependencies": {
-        "async": "^2.6.2"
+        "armlet": "^2.3.0",
+        "async": "^2.6.2",
+        "shell-escape": "^0.2.0"
     }
 }

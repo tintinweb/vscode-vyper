@@ -13,6 +13,7 @@ const mod_deco = require("./features/deco.js")
 const mod_signatures = require("./features/signatures.js")
 const mod_hover = require("./features/hover/hover.js")
 const mod_compile = require("./features/compile.js")
+const mod_analyze = require("./features/analyze.js")
 /** global vars */
 const VYPER_ID = "vyper";
 const vyperConfig = vscode.workspace.getConfiguration(VYPER_ID);
@@ -43,7 +44,6 @@ async function onDidChange(event) {
         }
         console.log("onDidChange ...")
         if(vyperConfig.decoration.enable){
-            console.log("deco enable")
             mod_deco.decorateWords(activeEditor, [
                 {
                     regex:"@\\b(public|payable|modifying)\\b",
@@ -97,10 +97,9 @@ async function onDidChange(event) {
     });
 }
 function onInitModules(context, type) {
-
     mod_hover.init(context, type, vyperConfig)
     mod_compile.init(context, type, vyperConfig)
-
+    //mod_analyze.init(context, type, vyperConfig)
 }
 
 function onActivate(context) {
