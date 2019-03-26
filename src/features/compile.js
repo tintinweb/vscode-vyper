@@ -223,7 +223,7 @@ function compileActiveFileCommand(contractFile) {
                     //if mythx is configured
                     // bytecode
                     for (let contractKey in success) {
-                        mod_analyze.analyze.mythX(ethAddress, password, success[contractKey].bytecode)
+                        mod_analyze.analyze.mythX(ethAddress, password, success[contractKey].bytecode, success[contractKey].deployedBytecode)
                         .then(result => {
                             vscode.window.showInformationMessage('[MythX success] ' + contractKey)
                             const util = require('util');
