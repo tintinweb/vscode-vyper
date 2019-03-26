@@ -7,7 +7,8 @@
  * */
 
 /** imports */
-const vscode = require("vscode");
+const vscode = require("vscode")
+const crypto = require("crypto")
 
 const mod_deco = require("./features/deco.js")
 const mod_signatures = require("./features/signatures.js")
@@ -18,15 +19,33 @@ const mod_analyze = require("./features/analyze.js")
 const VYPER_ID = "vyper";
 const vyperConfig = vscode.workspace.getConfiguration(VYPER_ID);
 var activeEditor;
+var fileHashes = {}  //<path>:hash
 
 /** classdecs */
+
+
+/** funcdecs */
+function fileDidChange(document){
+    let hash = crypto.createHash('sha1').update(document.getText()).digest('base64')
+    if(fileHashes.hasOwnProperty(document.uri.path) && fileHashes[document.uri]===hash){
+        return false;
+    }
+    fileHashes[document.uri.path]=hash;  // update hash
+    return true;
+}
 
 /** event funcs */
 async function onDidSave(document){
     return new Promise((reject,resolve) =>{
 
         if(document.languageId!=VYPER_ID){
-            resolve("langid_mismatch")
+            reject("langid_mismatch")
+            return;
+        }
+
+        if(!fileDidChange(document)){
+            // avoid triggering the event when switching tabs
+            reject("file did not change")
             return;
         }
         
@@ -39,7 +58,12 @@ async function onDidSave(document){
 async function onDidChange(event) {
     return new Promise((reject,resolve) => {
         if(vscode.window.activeTextEditor.document.languageId!=VYPER_ID){
-            resolve("langid_mismatch")
+            reject("langid_mismatch")
+            return;
+        }
+        if(!fileDidChange(vscode.window.activeTextEditor.document)){
+            // avoid triggering the event when switching tabs
+            reject("file did not change")
             return;
         }
         console.log("onDidChange ...")

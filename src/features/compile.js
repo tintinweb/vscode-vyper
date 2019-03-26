@@ -168,6 +168,7 @@ function compileActiveFileCommand(contractFile) {
         .then(
             (errormsg) => {
                 diagnosticCollections.compiler.clear();
+                diagnosticCollections.mythx.clear();
                 vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
                 let lineNr = 1; // add default errors to line 0 if not known
                 let matches = /(?:line\s+(\d+))/gm.exec(errormsg)
