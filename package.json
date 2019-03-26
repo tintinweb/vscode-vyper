@@ -94,17 +94,17 @@
                 "vyper.analysis.onSave": {
                     "type": "boolean",
                     "default": true,
-                    "description": "Automatically analyze the code when saving and annotate code with analysis results."
-                },
-                "vyper.analysis.mythx.ethaddress": {
-                    "type": "string",
-                    "default": "",
-                    "description": "Your MythX Smart Contract Analysis Platform user account: ethAddress"
+                    "markdownDescription": "Automatically submit the compiled bytecode to MythX for security analysis and annotate the code with the security scan results. See https://mythx.io for details"
                 },
                 "vyper.analysis.mythx.password": {
                     "type": "string",
-                    "default": "",
-                    "description": "Your MythX Smart Contract Analysis Platform password"
+                    "default": "trial",
+                    "markdownDescription": "MythX Password. See https://mythx.io to get password"
+                },
+                "vyper.analysis.mythx.ethAddress": {
+                    "type": "string",
+                    "default": "0x0000000000000000000000000000000000000000",
+                    "markdownDescription": "MetaMask ETH address used to login to MythX. See https://mythx.io"
                 }
             }
         },

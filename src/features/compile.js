@@ -214,10 +214,11 @@ function compileActiveFileCommand(contractFile) {
                 diagnosticCollections.compiler.clear();
                 diagnosticCollections.mythx.clear();
                 vscode.window.showInformationMessage('[Compiler success] ' + Object.keys(success).join(","))
-                //
-                let password = vyperConfig.analysis.mythx.password || process.env.MYTHX_PASSWORD
-                let ethAddress = vyperConfig.analysis.mythx.ethaddress || process.env.MYTHX_ETH_ADDRESS
                 
+                // precedence: (1) vyperConfig, otherwise (2) process.env 
+                let password = vyperConfig.analysis.mythx.password || process.env.MYTHX_PASSWORD
+                let ethAddress = vyperConfig.analysis.mythx.ethAddress || process.env.MYTHX_ETH_ADDRESS
+
                 if(vyperConfig.analysis.onSave && ethAddress && password){
                     //if mythx is configured
                     // bytecode
