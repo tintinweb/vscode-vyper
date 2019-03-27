@@ -19,35 +19,24 @@ const mod_analyze = require("./features/analyze.js")
 const VYPER_ID = "vyper";
 const vyperConfig = vscode.workspace.getConfiguration(VYPER_ID);
 var activeEditor;
-var fileHashes = {}  //<path>:hash
 
 /** classdecs */
 
 
 /** funcdecs */
-function fileDidChange(document){
-    let hash = crypto.createHash('sha1').update(document.getText()).digest('base64')
-    if(fileHashes.hasOwnProperty(document.uri.path) && fileHashes[document.uri]===hash){
-        return false;
-    }
-    fileHashes[document.uri.path]=hash;  // update hash
-    return true;
-}
+
 
 /** event funcs */
 async function onDidSave(document){
     return new Promise((reject,resolve) =>{
 
         if(document.languageId!=VYPER_ID){
+            console.log("langid mismatch")
             reject("langid_mismatch")
             return;
         }
 
-        if(!fileDidChange(document)){
-            // avoid triggering the event when switching tabs
-            reject("file did not change")
-            return;
-        }
+        //always run on save
         
         if(vyperConfig.compile.onSave){
             resolve(mod_compile.compileContractCommand(document.uri))
@@ -61,11 +50,7 @@ async function onDidChange(event) {
             reject("langid_mismatch")
             return;
         }
-        if(!fileDidChange(vscode.window.activeTextEditor.document)){
-            // avoid triggering the event when switching tabs
-            reject("file did not change")
-            return;
-        }
+
         console.log("onDidChange ...")
         if(vyperConfig.decoration.enable){
             mod_deco.decorateWords(activeEditor, [
