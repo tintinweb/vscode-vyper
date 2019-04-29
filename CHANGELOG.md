@@ -2,7 +2,7 @@
 
 ## 0.0.4
 - updated Readme
-- use mythx trial account by default; also provide deployedbytecode to analysis
+- ask to start free mythx security platform trial 
 
 ## 0.0.2 - 0.0.3
 - mythx support (auto analyze onSave)

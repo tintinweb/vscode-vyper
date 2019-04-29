@@ -84,7 +84,6 @@ see [CHANGELOG](./CHANGELOG.md)
 
 ## 0.0.4
 - updated Readme
-- use mythx trial account by default; also provide deployedbytecode to analysis
-
+- ask to start free mythx security platform trial; also provide deployedbytecode to analysis
 
 -----------------------------------------------------------------------------------------------------------
