@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.4
+- updated Readme
+- use mythx trial account by default; also provide deployedbytecode to analysis
+
 ## 0.0.2 - 0.0.3
 - mythx support (auto analyze onSave)
 - shellescape file paths

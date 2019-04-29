@@ -82,11 +82,9 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
-### 0.0.3
-
-- mythx support (auto analyze onSave)
-- shellescape file paths
-- fixed some typos
+## 0.0.4
+- updated Readme
+- use mythx trial account by default; also provide deployedbytecode to analysis
 
 
 -----------------------------------------------------------------------------------------------------------
