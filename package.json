@@ -98,13 +98,13 @@
                 },
                 "vyper.analysis.mythx.password": {
                     "type": "string",
-                    "default": "trial",
+                    "default": "",
                     "markdownDescription": "MythX Password. See https://mythx.io to get password"
                 },
                 "vyper.analysis.mythx.ethAddress": {
                     "type": "string",
-                    "default": "0x0000000000000000000000000000000000000000",
-                    "markdownDescription": "MetaMask ETH address used to login to MythX. See https://mythx.io"
+                    "default": "initial",
+                    "markdownDescription": "MetaMask ETH address used to login to MythX. Use 'trial' for trial mode. See https://mythx.io"
                 }
             }
         },

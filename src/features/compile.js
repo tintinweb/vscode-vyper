@@ -13,6 +13,7 @@ const mod_analyze = require("./analyze.js")
 const shellescape = require('shell-escape');
 
 var vyperConfig;
+var extensionContext;
 var compiler = {
     name: "vyper",
     version: null
@@ -220,6 +221,33 @@ function compileActiveFileCommand(contractFile) {
                 let password = vyperConfig.analysis.mythx.password || process.env.MYTHX_PASSWORD
                 let ethAddress = vyperConfig.analysis.mythx.ethAddress || process.env.MYTHX_ETH_ADDRESS
 
+                //set to trial?
+                if(ethAddress=="trial"){
+                    ethAddress = "0x0000000000000000000000000000000000000000"
+                    password = "trial"
+                }
+
+                //not set and never asked
+                if(ethAddress == "initial"){
+                    if (typeof extensionContext.globalState.get("vyper.mythx.account.trial") === "undefined"){
+                        vscode.window.showInformationMessage('[MythX ] Enable MythX security analysis trial mode?', "Free Trial", "Tell me more!", "No, Thanks!")
+                            .then(choice => {
+                                if(choice=="Free Trial"){
+                                    extensionContext.globalState.update("vyper.mythx.account.trial","useTrial")
+                                    return compileActiveFileCommand(contractFile)
+                                } else if(choice=="Tell me more!"){
+                                    vscode.env.openExternal(vscode.Uri.parse("https://www.mythx.io/#faq"))
+                                } else {
+                                    extensionContext.globalState.update("vyper.mythx.account.trial","noAsk")
+                                }
+                            })
+                        }
+                    if(extensionContext.globalState.get("vyper.mythx.account.trial") && extensionContext.globalState.get("vyper.mythx.account.trial")=="useTrial"){
+                        ethAddress = "0x0000000000000000000000000000000000000000"
+                        password = "trial"
+                    }
+                }
+
                 if(vyperConfig.analysis.onSave && ethAddress && password){
                     //if mythx is configured
                     // bytecode
@@ -291,6 +319,7 @@ function init(context, type, _vyperConfig) {
     diagnosticCollections.mythx = vscode.languages.createDiagnosticCollection('MythX Security Platform');
     context.subscriptions.push(diagnosticCollections.mythx)
     vyperConfig = _vyperConfig
+    extensionContext = context
 }
 
 module.exports = {
