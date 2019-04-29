@@ -7,7 +7,7 @@
 
 # vscode-Vyper    
    
-<img src="/images/icon.png">
+![img](./images/icon.png)
 
 Ethereum Vyper language support for Visual Studio Code  
 
