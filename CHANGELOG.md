@@ -1,6 +1,7 @@
 # Change Log
 
-## 0.0.5
+## 0.0.5 - 0.0-6
+- repackage broken archive
 - fix diagProvider only showing one mythx scan result
 
 ## 0.0.4
