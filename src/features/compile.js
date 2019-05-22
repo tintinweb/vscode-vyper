@@ -254,6 +254,7 @@ function compileActiveFileCommand(contractFile) {
                     for (let contractKey in success) {
                         mod_analyze.analyze.mythX(ethAddress, password, success[contractKey].bytecode, success[contractKey].deployedBytecode)
                         .then(result => {
+                            let diagIssues = []
                             vscode.window.showInformationMessage('[MythX success] ' + contractKey)
                             const util = require('util');
                             console.debug(`${util.inspect(result.status, {depth: null})}`);
@@ -265,16 +266,17 @@ function compileActiveFileCommand(contractFile) {
                                     let errormsg = `[${issue.severity}] ${issue.swcID}: ${issue.swcTitle}\n${issue.description.head}\n${issue.description.tail}\n\nCovered Instructions/Paths: ${result.meta.coveredInstructions}/${result.meta.coveredPaths}`
                                     let lineNr = 1  // we did not submit any source so just pin it to line 0
 
-                                    diagnosticCollections.mythx.set(contractFile, [{
+                                    diagIssues.push({
                                         code: '',
                                         message: shortmsg,
                                         range: new vscode.Range(new vscode.Position(lineNr - 1, 0), new vscode.Position(lineNr - 1, 255)),
                                         severity: mod_analyze.mythXSeverityToVSCodeSeverity[issue.severity],
                                         source: errormsg,
                                         relatedInformation: []
-                                    }]);
+                                    });
                                 })
                             })
+                            diagnosticCollections.mythx.set(contractFile, diagIssues)
                         }).catch(err => {
                             vscode.window.showErrorMessage('[MythX error] ' + err)
                             console.log(err)
