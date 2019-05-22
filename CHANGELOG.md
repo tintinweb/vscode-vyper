@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.5
+- fix diagProvider only showing one mythx scan result
+
 ## 0.0.4
 - updated Readme
 - ask to start free mythx security platform trial 

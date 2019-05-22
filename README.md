@@ -82,8 +82,7 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
-## 0.0.4
-- updated Readme
-- ask to start free mythx security platform trial; also provide deployedbytecode to analysis
+## 0.0.5
+- fix diagProvider only showing one mythx scan result
 
 -----------------------------------------------------------------------------------------------------------
