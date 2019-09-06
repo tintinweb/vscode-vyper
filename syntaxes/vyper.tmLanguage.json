@@ -4,7 +4,7 @@
         "If you want to provide a fix or improvement, please create a pull request against the original repository.",
         "Once accepted there, we are happy to receive an update request."
     ],
-    "version": "https://github.com/MagicStack/MagicPython/commit/8ff35b3e5fcde471fae62a57ea1ae1c7cd34c9fc",
+    "version": "https://github.com/MagicStack/MagicPython/commit/38422d302fe0b3e7716d26ce8cd7d0b9685f3a38",
     "name": "Vyper",
     "scopeName": "source.vyper",
     "patterns": [
@@ -836,7 +836,7 @@
             ]
         },
         "f-expression": {
-            "comment": "All valid Python expressions, except comments and line cont",
+            "comment": "All valid Python expressions, except comments and line continuation",
             "patterns": [
                 {
                     "include": "#expression-bare"
@@ -1709,15 +1709,15 @@
                 },
                 {
                     "name": "support.type.basetype.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    string | bool | decimal | wei_value | bytes32 | timestamp | bytearray | timedelta | address | uint256 | int128 | bytes   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    wei_value | bytes32 | decimal | bool | bytes | timedelta | uint256 | int128 | address | string | bytearray | timestamp   )\\b\n"
                 },
                 {
                     "name": "support.type.keywords.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    decimal | contract | indexed | address | uint256 | int128   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    indexed | decimal | uint256 | int128 | contract | address   )\\b\n"
                 },
                 {
                     "name": "support.type.unit.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    sec | wei \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    wei | sec \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
                 },
                 {
                     "name": "support.type.constant.vyper",
@@ -5361,7 +5361,7 @@
         },
         "reserved-names-vyper": {
             "name": "name.reserved.vyper",
-            "match": "(?x)\n  \\b (string | raise | true | szabo | babbage | stop | wei | lovelace | for | uint256 | int128 | assert | bytes | this | push | clear | ada | min_int128 | mwei | throw | pwei | init | max_uint256 | map | kwei | address | continue | gwei | pass | swap | send | selfdestruct | while | def | shannon | bytes32 | contract | finney | zero_address | false | none | twei | until | call | self | units | dup | ether | ____init____ | max_decimal | min_decimal | _init_ | if | ___init___ | empty_bytes32max_int128) \\b\n"
+            "match": "(?x)\n  \\b (bytes32 | send | continue | bytes | twei | true | shannon | ada | int128 | self | units | this | init | finney | ether | throw | lovelace | kwei | max_decimal | min_decimal | dup | pass | gwei | contract | selfdestruct | raise | address | call | string | push | zero_address | swap | babbage | pwei | false | min_int128 | uint256 | _init_ | clear | def | assert | stop | ___init___ | wei | none | while | szabo | ____init____ | for | empty_bytes32max_int128 | if | until | mwei | max_uint256 | map) \\b\n"
         }
     }
 }
