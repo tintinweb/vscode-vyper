@@ -9,7 +9,9 @@
    
 ![img](./images/icon.png)
 
-Ethereum Vyper language support for Visual Studio Code  
+Ethereum Vyper language support for Visual Studio Code
+
+[Marketplace](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-vyper): `ext install tintinweb.vscode-vyper`
 
 
 ## Features
@@ -38,40 +40,46 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 * It is assumed that vyper is installed and generally available on the system (`pip install vyper`). In case vyper is not available in path or called in a virtualenv configure the vyper command in `Settings` → `Vyper` → `Command`
 
-## Extension Settings
-
-![image](https://user-images.githubusercontent.com/2865694/54860098-67a48d00-4d15-11e9-951e-e8422bc3fae5.png)
-
 ## Tour
 
 #### Syntax Highlighting
 
-![image](https://user-images.githubusercontent.com/2865694/54860156-63c53a80-4d16-11e9-9c94-0bdead2346b6.png)
+##### VSCode Light+ (default light)
+
+<img width="550" alt="theme-light" src="https://user-images.githubusercontent.com/2865694/64434714-76afa980-d0c1-11e9-8836-520a1920435b.png">
+
+##### Solidity Visual Auditor - Dark
+
+<img width="550" alt="theme-light" src="https://user-images.githubusercontent.com/2865694/54860156-63c53a80-4d16-11e9-9c94-0bdead2346b6.png">
 
 #### Compiler Errors and Details
 
-![image](https://user-images.githubusercontent.com/2865694/54860166-a1c25e80-4d16-11e9-9352-89e380b3b498.png)
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860166-a1c25e80-4d16-11e9-9352-89e380b3b498.png">
 
 
 #### Hover information
 
-![image](https://user-images.githubusercontent.com/2865694/54860173-b6065b80-4d16-11e9-8dba-84107c6ac726.png)
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860173-b6065b80-4d16-11e9-8dba-84107c6ac726.png">
 
 
 #### Security Augmented Decorations - Auditor Mode
 
-![image](https://user-images.githubusercontent.com/2865694/54860188-ff56ab00-4d16-11e9-92a7-01e6c2ddcbf1.png)
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860188-ff56ab00-4d16-11e9-92a7-01e6c2ddcbf1.png">
 
 #### Snippets
 
 * Quickly create `constructor`, `fallback` function, `methods`, `structs`, ... as you type. Select the snippet from the suggestion box. See [snippets/vyper.json](./snippets/vyper.json) for a list of available snippets.
 * start typing ...
 
-![image](https://user-images.githubusercontent.com/2865694/54860223-6e340400-4d17-11e9-8b21-49deed0db4db.png)
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860223-6e340400-4d17-11e9-8b21-49deed0db4db.png">
 
 * creates a template constructor after selecting it from the suggestion box.
 
-![image](https://user-images.githubusercontent.com/2865694/54860229-75f3a880-4d17-11e9-93fc-e2a02ac60459.png)
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860229-75f3a880-4d17-11e9-93fc-e2a02ac60459.png">
+
+## Extension Settings
+
+<img width="600" alt="settings" src="https://user-images.githubusercontent.com/2865694/54860098-67a48d00-4d15-11e9-951e-e8422bc3fae5.png">
 
 ## Developer Notes
 
