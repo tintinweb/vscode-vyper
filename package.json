@@ -2,7 +2,7 @@
     "name": "vscode-vyper",
     "displayName": "Vyper",
     "description": "Ethereum Vyper language support for Visual Studio Code",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "keywords": [
         "vyper",
         "ethereum",
@@ -122,7 +122,7 @@
         ]
     },
     "scripts": {
-        "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.js"
+        "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.json"
     },
     "dependencies": {
         "armlet": "^2.3.0",

@@ -90,8 +90,10 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
-## 0.0.5 - 0.0-6
-- repackage broken archive
-- fix diagProvider only showing one mythx scan result
+## 0.0.7
+- updated grammar
+- fixed mythX issue due to API change
+- fixed diagnostics handling: compiler warnings and mythx are now updated on a per file basis. 
+- fixed run compile / when file is opened the first time, not only on change.
 
 -----------------------------------------------------------------------------------------------------------
