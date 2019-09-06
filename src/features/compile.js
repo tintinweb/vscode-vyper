@@ -168,8 +168,8 @@ function compileActiveFileCommand(contractFile) {
     compileActiveFile(contractFile)
         .then(
             (errormsg) => {
-                diagnosticCollections.compiler.clear();
-                diagnosticCollections.mythx.clear();
+                diagnosticCollections.compiler.delete(contractFile);
+                diagnosticCollections.mythx.delete(contractFile);
                 vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
                 let lineNr = 1; // add default errors to line 0 if not known
                 let matches = /(?:line\s+(\d+))/gm.exec(errormsg)
@@ -213,8 +213,8 @@ function compileActiveFileCommand(contractFile) {
                 }
             },
             (success) => {
-                diagnosticCollections.compiler.clear();
-                diagnosticCollections.mythx.clear();
+                diagnosticCollections.compiler.delete(contractFile);
+                diagnosticCollections.mythx.delete(contractFile);
                 vscode.window.showInformationMessage('[Compiler success] ' + Object.keys(success).join(","))
                 
                 // precedence: (1) vyperConfig, otherwise (2) process.env 
