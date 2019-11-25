@@ -2,7 +2,7 @@
     "name": "vscode-vyper",
     "displayName": "Vyper",
     "description": "Ethereum Vyper language support for Visual Studio Code",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "keywords": [
         "vyper",
         "ethereum",

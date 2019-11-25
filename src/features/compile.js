@@ -167,51 +167,6 @@ compileVyper.necessary = function(options, callback) {
 function compileActiveFileCommand(contractFile) {
     compileActiveFile(contractFile)
         .then(
-            (errormsg) => {
-                diagnosticCollections.compiler.delete(contractFile);
-                diagnosticCollections.mythx.delete(contractFile);
-                vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
-                let lineNr = 1; // add default errors to line 0 if not known
-                let matches = /(?:line\s+(\d+))/gm.exec(errormsg)
-                if (matches && matches.length==2){
-                    //only one line ref
-                    lineNr = parseInt(matches[1])
-                }
-
-                let lines = errormsg.split(/\r?\n/)
-                console.log(errormsg)
-                let shortmsg = lines[0]
-
-                // IndexError
-                if (lines.indexOf("SyntaxError: invalid syntax") > -1) {
-                    let matches = /line (\d+)/gm.exec(errormsg)
-                    if (matches.length >= 2) {
-                        lineNr = parseInt(matches[1])
-                    }
-                    shortmsg = "SyntaxError: invalid syntax";
-                } else {
-                    //match generic vyper exceptions
-                    let matches = /vyper\.exceptions\.\w+Exception:\s+(?:line\s+(\d+)).*$/gm.exec(errormsg)
-                    if (matches && matches.length > 0) {
-                        shortmsg = matches[0]
-                        if (matches.length >= 2) {
-                            lineNr = parseInt(matches[1])
-                        }
-                    }
-
-
-                }
-                if (errormsg) {
-                    diagnosticCollections.compiler.set(contractFile, [{
-                        code: '',
-                        message: shortmsg,
-                        range: new vscode.Range(new vscode.Position(lineNr - 1, 0), new vscode.Position(lineNr - 1, 255)),
-                        severity: vscode.DiagnosticSeverity.Error,
-                        source: errormsg,
-                        relatedInformation: []
-                    }]);
-                }
-            },
             (success) => {
                 diagnosticCollections.compiler.delete(contractFile);
                 diagnosticCollections.mythx.delete(contractFile);
@@ -283,6 +238,49 @@ function compileActiveFileCommand(contractFile) {
                         })
                     }
                 }
+            },
+            (errormsg) => {
+                diagnosticCollections.compiler.delete(contractFile);
+                diagnosticCollections.mythx.delete(contractFile);
+                vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
+                let lineNr = 1; // add default errors to line 0 if not known
+                let matches = /(?:line\s+(\d+))/gm.exec(errormsg)
+                if (matches && matches.length==2){
+                    //only one line ref
+                    lineNr = parseInt(matches[1])
+                }
+
+                let lines = errormsg.split(/\r?\n/)
+                console.log(errormsg)
+                let shortmsg = lines[0]
+
+                // IndexError
+                if (lines.indexOf("SyntaxError: invalid syntax") > -1) {
+                    let matches = /line (\d+)/gm.exec(errormsg)
+                    if (matches.length >= 2) {
+                        lineNr = parseInt(matches[1])
+                    }
+                    shortmsg = "SyntaxError: invalid syntax";
+                } else {
+                    //match generic vyper exceptions
+                    let matches = /vyper\.exceptions\.\w+Exception:\s+(?:line\s+(\d+)).*$/gm.exec(errormsg)
+                    if (matches && matches.length > 0) {
+                        shortmsg = matches[0]
+                        if (matches.length >= 2) {
+                            lineNr = parseInt(matches[1])
+                        }
+                    }
+                }
+                if (errormsg) {
+                    diagnosticCollections.compiler.set(contractFile, [{
+                        code: '',
+                        message: shortmsg,
+                        range: new vscode.Range(new vscode.Position(lineNr - 1, 0), new vscode.Position(lineNr - 1, 255)),
+                        severity: vscode.DiagnosticSeverity.Error,
+                        source: errormsg,
+                        relatedInformation: []
+                    }]);
+                }
             }
         )
         .catch(ex => {
@@ -292,7 +290,7 @@ function compileActiveFileCommand(contractFile) {
 }
 
 function compileActiveFile(contractFile) {
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
         if (!contractFile && vscode.window.activeTextEditor.document.languageId !== VYPER_ID) {
             reject("Not a vyper source file")
             return;

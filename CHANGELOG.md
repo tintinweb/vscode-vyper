@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.8
+- fix misused promises
+
 ## 0.0.7
 - updated grammar
 - fixed mythX issue due to API change

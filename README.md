@@ -90,6 +90,9 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
+## 0.0.8
+- fix misused promises
+
 ## 0.0.7
 - updated grammar
 - fixed mythX issue due to API change

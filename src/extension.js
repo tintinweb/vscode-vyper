@@ -1,3 +1,4 @@
+'use strict'
 /** 
  * @author github.com/tintinweb
  * @license MIT
@@ -28,30 +29,22 @@ var activeEditor;
 
 /** event funcs */
 async function onDidSave(document){
-    return new Promise((reject,resolve) =>{
+    if(document.languageId!=VYPER_ID){
+        console.log("langid mismatch")
+        return;
+    }
 
-        if(document.languageId!=VYPER_ID){
-            console.log("langid mismatch")
-            reject("langid_mismatch")
-            return;
-        }
-
-        //always run on save
-        
-        if(vyperConfig.compile.onSave){
-            resolve(mod_compile.compileContractCommand(document.uri))
-        }
-    })
+    //always run on save
+    if(vyperConfig.compile.onSave){
+        mod_compile.compileContractCommand(document.uri)
+    }
 }
 
 async function onDidChange(event) {
-    return new Promise((reject,resolve) => {
         if(vscode.window.activeTextEditor.document.languageId!=VYPER_ID){
-            reject("langid_mismatch")
             return;
         }
 
-        console.log("onDidChange ...")
         if(vyperConfig.decoration.enable){
             mod_deco.decorateWords(activeEditor, [
                 {
@@ -99,11 +92,6 @@ async function onDidChange(event) {
                 },
             ], mod_deco.styles.boldUnderline);
         }
-        
-
-        console.log("✓ onDidChange")
-        resolve()
-    });
 }
 function onInitModules(context, type) {
     mod_hover.init(context, type, vyperConfig)
@@ -116,8 +104,6 @@ function onActivate(context) {
     const active = vscode.window.activeTextEditor;
     if (!active || !active.document) return;
     activeEditor = active;
-
-    console.log(" activate extension: vyper ...")
 
     registerDocType(VYPER_ID);
     
@@ -186,7 +172,6 @@ function onActivate(context) {
 
 
     }
-    console.log("✓ activate extension: vyper")
 }
 
 /* exports */

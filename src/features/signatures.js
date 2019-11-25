@@ -1,10 +1,11 @@
+'use strict'
 /** 
  * @author github.com/tintinweb
  * @license MIT
  * 
  * */
 
-class VyperSignatureHelpProvider{
+class VyperSignatureHelpProvider {
     provideSignatureHelp(document, position, token, context){
         return new Promise((resolve, reject) => {
             position = position.translate(0, -1)
