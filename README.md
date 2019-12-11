@@ -90,13 +90,8 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
-## 0.0.8
-- fix misused promises
-
-## 0.0.7
-- updated grammar
-- fixed mythX issue due to API change
-- fixed diagnostics handling: compiler warnings and mythx are now updated on a per file basis. 
-- fixed run compile / when file is opened the first time, not only on change.
+## 0.0.9
+- updated mythx library: switched from `armlet` to `mythxjs`.
+- fix: make settings take effect immediately.
 
 -----------------------------------------------------------------------------------------------------------

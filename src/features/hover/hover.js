@@ -1,9 +1,15 @@
+'use strict'
+/** 
+ * @author github.com/tintinweb
+ * @license MIT
+ * 
+ * */
 const vscode = require('vscode');
-const fs = require('fs')
+const fs = require('fs');
 const path = require("path");
+const settings = require("../../settings");
 
 const builtinsArr = JSON.parse(fs.readFileSync(path.resolve(__dirname,'./builtins.json')));  
-let vyperConfig;
 
 function createHover(name, snippet, type) {
     var text = Array();
@@ -60,7 +66,7 @@ function createHover(name, snippet, type) {
 }
 
 function provideHoverHandler(document, position, token, type) {
-    if (!vyperConfig.hover.enable) {
+    if (!settings.extensionConfig().hover.enable) {
         return;
     }
     const range = document.getWordRangeAtPosition(position, /(tx\.gasprice|tx\.origin|msg\.data|msg\.sender|msg\.sig|msg\.value|block\.coinbase|block\.difficulty|block\.gaslimit|block\.number|block\.timestamp|abi\.encodePacked|abi\.encodeWithSelector|abi\.encodeWithSignature|abi\.decode|abi\.encode|\.?[0-9_\w>]+)/);
@@ -89,9 +95,7 @@ function provideHoverHandler(document, position, token, type) {
     }
 }
 
-function init(context, type, config){
-    vyperConfig = config;
-    
+function init(context, type){
     context.subscriptions.push(
         vscode.languages.registerHoverProvider(type, {
             provideHover(document, position, token) {

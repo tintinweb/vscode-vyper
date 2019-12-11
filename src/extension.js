@@ -8,17 +8,14 @@
  * */
 
 /** imports */
-const vscode = require("vscode")
-const crypto = require("crypto")
+const vscode = require("vscode");
 
-const mod_deco = require("./features/deco.js")
-const mod_signatures = require("./features/signatures.js")
-const mod_hover = require("./features/hover/hover.js")
-const mod_compile = require("./features/compile.js")
-const mod_analyze = require("./features/analyze.js")
+const mod_deco = require("./features/deco.js");
+const mod_signatures = require("./features/signatures.js");
+const mod_hover = require("./features/hover/hover.js");
+const mod_compile = require("./features/compile.js");
+const settings = require("./settings");
 /** global vars */
-const VYPER_ID = "vyper";
-const vyperConfig = vscode.workspace.getConfiguration(VYPER_ID);
 var activeEditor;
 
 /** classdecs */
@@ -29,23 +26,23 @@ var activeEditor;
 
 /** event funcs */
 async function onDidSave(document){
-    if(document.languageId!=VYPER_ID){
+    if(document.languageId != settings.LANGUAGE_ID){
         console.log("langid mismatch")
         return;
     }
 
     //always run on save
-    if(vyperConfig.compile.onSave){
+    if(settings.extensionConfig().compile.onSave){
         mod_compile.compileContractCommand(document.uri)
     }
 }
 
 async function onDidChange(event) {
-        if(vscode.window.activeTextEditor.document.languageId!=VYPER_ID){
+        if(vscode.window.activeTextEditor.document.languageId != settings.LANGUAGE_ID){
             return;
         }
 
-        if(vyperConfig.decoration.enable){
+        if(settings.extensionConfig().decoration.enable){
             mod_deco.decorateWords(activeEditor, [
                 {
                     regex:"@\\b(public|payable|modifying)\\b",
@@ -94,9 +91,8 @@ async function onDidChange(event) {
         }
 }
 function onInitModules(context, type) {
-    mod_hover.init(context, type, vyperConfig)
-    mod_compile.init(context, type, vyperConfig)
-    //mod_analyze.init(context, type, vyperConfig)
+    mod_hover.init(context, type)
+    mod_compile.init(context, type)
 }
 
 function onActivate(context) {
@@ -105,7 +101,7 @@ function onActivate(context) {
     if (!active || !active.document) return;
     activeEditor = active;
 
-    registerDocType(VYPER_ID);
+    registerDocType(settings.LANGUAGE_ID);
     
     function registerDocType(type) {
         context.subscriptions.push(
@@ -127,7 +123,7 @@ function onActivate(context) {
             vscode.commands.registerCommand('vyper.compileContract', mod_compile.compileContractCommand)
         )
         
-        if(!vyperConfig.mode.active){
+        if(!settings.extensionConfig().mode.active){
             console.log("ⓘ activate extension: entering passive mode. not registering any active code augmentation support.")
             return;
         }

@@ -1,32 +1,29 @@
+'use strict'
 /** 
  * @author github.com/tintinweb
  * @license MIT
  * 
- * taken from the armlet example
  * */
+const vscode = require('vscode');
 
-const armlet = require('armlet')
-const vscode = require('vscode')
+const {Client} = require('mythxjs');
 
 const analyze = {
-    mythX : function (ethAddress, password, bytecode, deployedBytecode){
-        //returns a promise!
-        const client = new armlet.Client(
-            {
-                password: password,
-                ethAddress: ethAddress
-            })
-        const data = {
-            "bytecode": bytecode,
-            "deployedBytecode": deployedBytecode
-        };
-        return client.analyzeWithStatus(
-            {
-            "data": data,    // required
-            "timeout": 2 * 60 * 1000,  // optional, but can improve response time
-            "clientToolName": 'vscode-vyper-' + vscode.extensions.getExtension('tintinweb.vscode-vyper').packageJSON.version,
-            "noCacheLookup": false
-            })
+    mythXjs : function (ethAddress, password, bytecode, deployedBytecode){
+        return new Promise(async (resolve, reject) => {
+            //returns a promise!
+            const client = new Client(ethAddress, password, 'vscode-vyper-' + vscode.extensions.getExtension('tintinweb.vscode-vyper').packageJSON.version); 
+            
+            await client.login();
+            const result = await client.analyze({
+                "bytecode": bytecode,
+                "deployedBytecode": deployedBytecode
+            });
+
+            const { uuid } = result;
+            const analysisResult = await client.getDetectedIssues(uuid);
+            resolve(analysisResult);
+        });
     }
 }
 
