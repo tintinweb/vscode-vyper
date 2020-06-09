@@ -98,7 +98,6 @@ function onInitModules(context, type) {
 function onActivate(context) {
 
     const active = vscode.window.activeTextEditor;
-    if (!active || !active.document) return;
     activeEditor = active;
 
     registerDocType(settings.LANGUAGE_ID);
