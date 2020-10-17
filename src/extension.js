@@ -157,6 +157,7 @@ function onActivate(context) {
         }, null, context.subscriptions);
 
         /***** SignatureHelper */
+        /*
         context.subscriptions.push(
             vscode.languages.registerSignatureHelpProvider(
                 { language: type },
@@ -164,7 +165,7 @@ function onActivate(context) {
                 '(', ','
             )
         );
-
+        */
 
     }
 }
