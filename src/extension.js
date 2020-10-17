@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /** 
  * @author github.com/tintinweb
  * @license MIT
@@ -27,13 +27,13 @@ var activeEditor;
 /** event funcs */
 async function onDidSave(document){
     if(document.languageId != settings.LANGUAGE_ID){
-        console.log("langid mismatch")
+        console.log("langid mismatch");
         return;
     }
 
     //always run on save
     if(settings.extensionConfig().compile.onSave){
-        mod_compile.compileContractCommand(document.uri)
+        mod_compile.compileContractCommand(document);
     }
 }
 
@@ -91,8 +91,8 @@ async function onDidChange(event) {
         }
 }
 function onInitModules(context, type) {
-    mod_hover.init(context, type)
-    mod_compile.init(context, type)
+    mod_hover.init(context, type);
+    mod_compile.init(context, type);
 }
 
 function onActivate(context) {
@@ -105,7 +105,7 @@ function onActivate(context) {
     function registerDocType(type) {
         context.subscriptions.push(
             vscode.languages.reg
-        )
+        );
 
         // taken from: https://github.com/Microsoft/vscode/blob/master/extensions/python/src/pythonMain.ts ; slightly modified
         // autoindent while typing
@@ -120,16 +120,16 @@ function onActivate(context) {
 
         context.subscriptions.push(
             vscode.commands.registerCommand('vyper.compileContract', mod_compile.compileContractCommand)
-        )
+        );
         
         if(!settings.extensionConfig().mode.active){
-            console.log("ⓘ activate extension: entering passive mode. not registering any active code augmentation support.")
+            console.log("ⓘ activate extension: entering passive mode. not registering any active code augmentation support.");
             return;
         }
         /** module init */
         onInitModules(context, type);
-        onDidChange()
-        onDidSave(active.document)
+        onDidChange();
+        onDidSave(active.document);
 
         /** event setup */
         /***** OnChange */

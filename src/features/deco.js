@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /** 
  * @author github.com/tintinweb
  * @license MIT
@@ -56,7 +56,7 @@ const styles = {
         fontWeight: "bold",
         textDecoration: "underline"
     }),
-}
+};
 
 async function decorateWords(editor, decorules, decoStyle){
     return new Promise(resolve => {
@@ -80,13 +80,13 @@ async function decorateWords(editor, decorules, decoStyle){
                 };
                 decos.push(decoration);
             }
-        })
+        });
         editor.setDecorations(decoStyle, decos);
-        resolve()
+        resolve();
     });
 }
 
 module.exports = {
     decorateWords: decorateWords,
     styles: styles
-}
+};

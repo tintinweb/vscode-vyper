@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 /** 
  * @author github.com/tintinweb
  * @license MIT
@@ -25,15 +25,15 @@ const analyze = {
             resolve(analysisResult);
         });
     }
-}
+};
 
 const mythXSeverityToVSCodeSeverity = {
     "High": vscode.DiagnosticSeverity.Error,
     "Medium": vscode.DiagnosticSeverity.Warning,
     "Low": vscode.DiagnosticSeverity.Information,
-}
+};
 
 module.exports = {
     analyze:analyze,
     mythXSeverityToVSCodeSeverity:mythXSeverityToVSCodeSeverity
-}
+};
