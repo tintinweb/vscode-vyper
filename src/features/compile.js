@@ -46,17 +46,24 @@ compile.display = function (paths, options) {
     }
 };
 
+function workspaceForFile(fpath) {
+    let workspace = vscode.workspace.getWorkspaceFolder(vscode.Uri.file(fpath));
+    return workspace ? workspace.uri.fsPath : "";
+}
+
 // Check that vyper is available, save its version
-function checkVyper(callback) {
+function checkVyper(source_file, callback) {
     //allow anything as command - no shellescape to even allow python -m vyper --version etc...
-    exec(`${settings.extensionConfig().command} --version`, function (err, stdout, stderr) {
-        if (err)
-            return callback(`Error executing vyper:\n${stderr}`);
+    exec(`${settings.extensionConfig().command} --version`,
+        { 'cwd': workspaceForFile(source_file) },
+        function (err, stdout, stderr) {
+            if (err)
+                return callback(`Error executing vyper:\n${stderr}`);
 
-        compiler.version = stdout.trim();
+            compiler.version = stdout.trim();
 
-        callback(null);
-    });
+            callback(null);
+        });
 }
 
 // Execute vyper for single source file
@@ -64,21 +71,23 @@ function execVyper(source_path, callback) {
     const formats = ["abi", "bytecode", "bytecode_runtime"];
     const command = `${settings.extensionConfig().command} -f${formats.join(",")} '${shellescape([source_path])}'`;
 
-    exec(command, function (err, stdout, stderr) {
-        if (err)
-            return callback(
-                `${stderr}\nCompilation of ${source_path} failed. See above.`
-            );
-        var outputs = stdout.split(/\r?\n/);
+    exec(command,
+        { 'cwd': workspaceForFile(source_path) },
+        function (err, stdout, stderr) {
+            if (err)
+                return callback(
+                    `${stderr}\nCompilation of ${source_path} failed. See above.`
+                );
+            var outputs = stdout.split(/\r?\n/);
 
-        const compiled_contract = outputs.reduce(function (contract, output, index) {
-            return Object.assign(contract, {
-                [formats[index]]: output
-            });
-        }, {});
+            const compiled_contract = outputs.reduce(function (contract, output, index) {
+                return Object.assign(contract, {
+                    [formats[index]]: output
+                });
+            }, {});
 
-        callback(null, compiled_contract);
-    });
+            callback(null, compiled_contract);
+        });
 }
 
 // compile all options.paths
@@ -142,7 +151,7 @@ function compileVyper(options, callback) {
     // no vyper files found, no need to check vyper
     if (options.paths.length === 0) return callback(null, {}, []);
 
-    checkVyper(function (err) {
+    checkVyper(options.paths[0], function (err) {  //@use first files workspaces as CWD
         if (err) return callback(err);
 
         return compileAll(options, callback);
