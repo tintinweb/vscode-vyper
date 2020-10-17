@@ -45,7 +45,7 @@ const styles = {
     }),
     foreGroundNewEmit: vscode.window.createTextEditorDecorationType({
         dark: {
-            color:"#fffffff5",
+            color: "#fffffff5",
         },
         light: {
             color: ""
@@ -58,24 +58,24 @@ const styles = {
     }),
 };
 
-async function decorateWords(editor, decorules, decoStyle){
+async function decorateWords(editor, decorules, decoStyle) {
     return new Promise(resolve => {
         if (!editor) {
             return;
         }
-        var decos= [];
+        var decos = [];
         const text = editor.document.getText();
 
-        decorules.forEach(function(rule){
+        decorules.forEach(function (rule) {
             //var regEx = new RegExp("\\b" +word+"\\b" ,"g");
-            var regEx = new RegExp( rule.regex ,"g");
+            var regEx = new RegExp(rule.regex, "g");
             let match;
             while (match = regEx.exec(text)) {
                 var startPos = editor.document.positionAt(match.index);
                 var endPos = editor.document.positionAt(match.index + match[rule.captureGroup].trim().length);
                 //endPos.line = startPos.line; //hacky force
-                var decoration = { 
-                    range: new vscode.Range(startPos, endPos), 
+                var decoration = {
+                    range: new vscode.Range(startPos, endPos),
                     hoverMessage: rule.hoverMessage
                 };
                 decos.push(decoration);

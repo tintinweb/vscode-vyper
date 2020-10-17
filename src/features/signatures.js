@@ -6,12 +6,12 @@
  * */
 
 class VyperSignatureHelpProvider {
-    provideSignatureHelp(document, position, token, context){
+    provideSignatureHelp(document, position, token, context) {
         return new Promise((resolve, reject) => {
             position = position.translate(0, -1);
             let range = document.getWordRangeAtPosition(position);
             let name;
-            if (!range){
+            if (!range) {
                 return reject();
             }
             name = document.getText(range);
@@ -22,5 +22,5 @@ class VyperSignatureHelpProvider {
 }
 
 module.exports = {
-    VyperSignatureHelpProvider:VyperSignatureHelpProvider
+    VyperSignatureHelpProvider: VyperSignatureHelpProvider
 };
