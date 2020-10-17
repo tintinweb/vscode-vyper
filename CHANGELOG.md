@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.0.10
+- fix: an issue where the compilation would fail on windows systems #4
+- update: disabled mythx.io trial code
+- update: disabled signature helper (not yet implemented)
+- update: quick code cleanup
+
 ## 0.0.9
 - updated mythx library: switched from `armlet` to `mythxjs`.
 - fix: make settings take effect immediately.

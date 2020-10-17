@@ -3,7 +3,7 @@
     "displayName": "Vyper",
     "description": "Ethereum Vyper language support for Visual Studio Code",
     "license": "MIT",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "keywords": [
         "vyper",
         "ethereum",
