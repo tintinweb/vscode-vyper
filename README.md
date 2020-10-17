@@ -95,5 +95,6 @@ see [CHANGELOG](./CHANGELOG.md)
 - update: disabled mythx.io trial code
 - update: disabled signature helper (not yet implemented)
 - update: quick code cleanup
+- fix: allow workspace relative `vyper.command` #3
 
 -----------------------------------------------------------------------------------------------------------
