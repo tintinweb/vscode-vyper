@@ -69,8 +69,21 @@ function checkVyper(source_file, callback) {
 // Execute vyper for single source file
 function execVyper(source_path, callback) {
     const formats = ["abi", "bytecode", "bytecode_runtime"];
-    const command = `${settings.extensionConfig().command} -f${formats.join(",")} '${shellescape([source_path])}'`;
-
+    let escapedTarget;
+    if (process.platform.startsWith("win")){
+        //nasty windows shell..
+        if(source_path.includes('"')){
+            return callback(
+                `Compilation of ${source_path} failed. Invalid Filename (quotes).`
+            );
+        }
+        escapedTarget = `"${source_path}"`;
+    } else {
+        //assume linux/macos.bash.
+        escapedTarget = `${shellescape([source_path])}`; //is quoted.
+    }
+    const command = `${settings.extensionConfig().command} -f${formats.join(",")} ${escapedTarget}`;
+    console.log(command);
     exec(command,
         { 'cwd': workspaceForFile(source_path) },
         function (err, stdout, stderr) {
