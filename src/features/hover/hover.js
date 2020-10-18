@@ -65,7 +65,7 @@ function provideHoverHandler(document, position, token, type) {
         return;
     }
     const range = document.getWordRangeAtPosition(position, /(tx\.gasprice|tx\.origin|msg\.data|msg\.sender|msg\.sig|msg\.value|block\.coinbase|block\.difficulty|block\.gaslimit|block\.number|block\.timestamp|abi\.encodePacked|abi\.encodeWithSelector|abi\.encodeWithSignature|abi\.decode|abi\.encode|\.?[0-9_\w>]+)/);
-    if (range.length <= 0)
+    if (!range || range.length <= 0)
         return;
     const word = document.getText(range);
 
