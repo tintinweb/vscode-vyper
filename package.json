@@ -3,7 +3,7 @@
     "displayName": "Vyper",
     "description": "Ethereum Vyper language support for Visual Studio Code",
     "license": "MIT",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "keywords": [
         "vyper",
         "ethereum",
@@ -126,7 +126,7 @@
         "fetchGrammar": "rm -f syntaxes/vyper.tmLanguage.json  && python3 ./scripts/fetch_vyper_language_spec.py > syntaxes/vyper.tmLanguage.json"
     },
     "dependencies": {
-        "async": "^2.6.2",
+        "async": "^2.6.3",
         "chai": "^4.2.0",
         "mythxjs": "^1.3.1",
         "shell-escape": "^0.2.0"
