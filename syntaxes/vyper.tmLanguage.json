@@ -4,7 +4,7 @@
         "If you want to provide a fix or improvement, please create a pull request against the original repository.",
         "Once accepted there, we are happy to receive an update request."
     ],
-    "version": "https://github.com/MagicStack/MagicPython/commit/38422d302fe0b3e7716d26ce8cd7d0b9685f3a38",
+    "version": "https://github.com/MagicStack/MagicPython/commit/b2b4f4ae7b4e6284e80bda8080106b93bd588f9e",
     "name": "Vyper",
     "scopeName": "source.vyper",
     "patterns": [
@@ -33,6 +33,9 @@
                 },
                 {
                     "include": "#function-declaration"
+                },
+                {
+                    "include": "#generator"
                 },
                 {
                     "include": "#statement-keyword"
@@ -295,6 +298,9 @@
                     "include": "#lambda"
                 },
                 {
+                    "include": "#generator"
+                },
+                {
                     "include": "#illegal-operator"
                 },
                 {
@@ -308,6 +314,9 @@
                 },
                 {
                     "include": "#list"
+                },
+                {
+                    "include": "#odd-function-call"
                 },
                 {
                     "include": "#round-braces"
@@ -380,6 +389,7 @@
             ]
         },
         "member-access": {
+            "name": "meta.member.access.python",
             "begin": "(\\.)\\s*(?!\\.)",
             "end": "(?x)\n  # stop when you've just read non-whitespace followed by non-word\n  # i.e. when finished reading an identifier or function call\n  (?<=\\S)(?=\\W) |\n  # stop when seeing the start of something that's not a word,\n  # i.e. when seeing a non-identifier\n  (^|(?<=\\s))(?=[^\\\\\\w\\s]) |\n  $\n",
             "beginCaptures": {
@@ -393,6 +403,9 @@
                 },
                 {
                     "include": "#member-access-base"
+                },
+                {
+                    "include": "#member-access-attribute"
                 }
             ]
         },
@@ -420,6 +433,11 @@
                     "include": "#special-variables-types"
                 }
             ]
+        },
+        "member-access-attribute": {
+            "comment": "Highlight attribute access in otherwise non-specialized cases.",
+            "name": "meta.attribute.python",
+            "match": "(?x)\n  \\b ([[:alpha:]_]\\w*) \\b\n"
         },
         "special-names": {
             "name": "constant.other.caps.python",
@@ -464,6 +482,21 @@
             "patterns": [
                 {
                     "include": "#expression"
+                }
+            ]
+        },
+        "odd-function-call": {
+            "comment": "A bit obscured function call where there may have been an\narbitrary number of other operations to get the function.\nE.g. \"arr[idx](args)\"\n",
+            "begin": "(?x)\n  (?<= \\] | \\) ) \\s*\n  (?=\\()\n",
+            "end": "(\\))",
+            "endCaptures": {
+                "1": {
+                    "name": "punctuation.definition.arguments.end.python"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#function-arguments"
                 }
             ]
         },
@@ -609,9 +642,6 @@
                     "name": "storage.type.imaginary.number.python"
                 },
                 "2": {
-                    "name": "invalid.illegal.dec.python"
-                },
-                "3": {
                     "name": "invalid.illegal.dec.python"
                 }
             }
@@ -1076,6 +1106,7 @@
             }
         },
         "member-access-class": {
+            "name": "meta.member.access.python",
             "begin": "(\\.)\\s*(?!\\.)",
             "end": "(?<=\\S)(?=\\W)|$",
             "beginCaptures": {
@@ -1194,6 +1225,26 @@
             "endCaptures": {
                 "1": {
                     "name": "punctuation.separator.parameters.python"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#expression"
+                }
+            ]
+        },
+        "generator": {
+            "comment": "Match \"for ... in\" construct used in generators and for loops to\ncorrectly identify the \"in\" as a control flow keyword.\n",
+            "begin": "\\bfor\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.flow.python"
+                }
+            },
+            "end": "\\bin\\b",
+            "endCaptures": {
+                "0": {
+                    "name": "keyword.control.flow.python"
                 }
             },
             "patterns": [
@@ -1422,6 +1473,7 @@
                     "include": "#special-names"
                 },
                 {
+                    "name": "meta.indexed-name.python",
                     "match": "(?x)\n  \\b ([[:alpha:]_]\\w*) \\b\n"
                 },
                 {
@@ -1542,6 +1594,7 @@
         },
         "function-call": {
             "name": "meta.function-call.python",
+            "comment": "Regular function call of the type \"name(args)\"",
             "begin": "(?x)\n  \\b(?=\n    ([[:alpha:]_]\\w*) \\s* (\\()\n  )\n",
             "end": "(\\))",
             "endCaptures": {
@@ -1677,11 +1730,11 @@
                 },
                 {
                     "name": "support.function.builtin.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    floor | ceil | as_unitless_number | convert | slice | len | concat | sha3 | sha256 | method_id | keccak256 | ecrecover | ecadd | ecmul | extract32 | as_wei_value | raw_call | RLPList | blockhash | bitwise_and | bitwise_or | bitwise_xor | bitwise_not | uint256_addmod | uint256_mulmod | shift | create_forwarder_to | min | max   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    _abi_encode | floor | ceil | convert | slice | len | concat | sha256 | method_id | keccak256 | ecrecover | ecadd | ecmul | extract32 | as_wei_value | raw_call | blockhash | bitwise_and | bitwise_or | bitwise_xor | bitwise_not | uint256_addmod | uint256_mulmod | pow_mod256 | sqrt | shift | create_forwarder_to | min | max | empty | abs   )\\b\n"
                 },
                 {
                     "name": "support.function.builtin.lowlevel.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    clear | send | selfdestruct | raw_call | raw_log | create_forwarder_to   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    send | selfdestruct | raw_call | raw_log | create_forwarder_to   )\\b\n"
                 },
                 {
                     "name": "support.type.event.vyper",
@@ -1689,15 +1742,15 @@
                 },
                 {
                     "name": "support.type.reference.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    map | struct   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    map | struct | HashMap   )\\b\n"
                 },
                 {
                     "name": "support.function.builtin.modifiers.safe.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    private | nonrentant | constant | event   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    private | nonreentrant | constant | event | internal | view | pure   )\\b\n"
                 },
                 {
                     "name": "support.function.builtin.modifiers.unsafe.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    public | payable | modifying   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    public | payable | modifying | external   )\\b\n"
                 }
             ]
         },
@@ -1709,19 +1762,19 @@
                 },
                 {
                     "name": "support.type.basetype.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    wei_value | bytes32 | decimal | bool | bytes | timedelta | uint256 | int128 | address | string | bytearray | timestamp   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    bytes32 | bytearray | wei_value | timestamp | int256 | uint8 | uint256 | decimal | timedelta | string | int128 | address | bool | bytes   )\\b\n"
                 },
                 {
                     "name": "support.type.keywords.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    indexed | decimal | uint256 | int128 | contract | address   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    finney | gwei | range | def | ____init____ | timedelta | babbage | zero_address | raise | external | empty_bytes32 | assert | continue | wei | ada | min_int256 | min_int128 | chainid | max_decimal | default | indexed | selfdestruct | lovelace | immutable | throw | kwei | max_int128 | while | constant | ___default___ | balance | twei | codesize | false | max_int256 | _default_ | init | mwei | if | ____default____ | true | payable | internal | until | this | nonpayable | pass | public | nonreentrant | blockhash | max_uint256 | shannon | none | units | _init_ | ___init___ | is_contract | for | zero_wei | min_decimal | szabo | timestamp | ether | pwei | send   )\\b\n"
                 },
                 {
                     "name": "support.type.unit.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    wei | sec \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    shannon | finney | gwei | twei | kwei | wei | lovelace | ether | szabo | pwei | babbage | mwei | ada \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
                 },
                 {
                     "name": "support.type.constant.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    ZERO_ADDRESS | EMPTY_BYTES32 | MAX_INT128 | MAX_DECIMAL | MIN_DECIMAL | MAX_UINT256 \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n    ZERO_ADDRESS | EMPTY_BYTES32 | MAX_INT128 | MIN_INT128 | MAX_DECIMAL | MIN_DECIMAL | MAX_UINT256 \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
                 },
                 {
                     "name": "entity.other.inherited-class.interface.vyper",
@@ -5361,7 +5414,7 @@
         },
         "reserved-names-vyper": {
             "name": "name.reserved.vyper",
-            "match": "(?x)\n  \\b (bytes32 | send | continue | bytes | twei | true | shannon | ada | int128 | self | units | this | init | finney | ether | throw | lovelace | kwei | max_decimal | min_decimal | dup | pass | gwei | contract | selfdestruct | raise | address | call | string | push | zero_address | swap | babbage | pwei | false | min_int128 | uint256 | _init_ | clear | def | assert | stop | ___init___ | wei | none | while | szabo | ____init____ | for | empty_bytes32max_int128 | if | until | mwei | max_uint256 | map) \\b\n"
+            "match": "(?x)\n  \\b (finney | gwei | range | def | ____init____ | timedelta | babbage | zero_address | raise | external | empty_bytes32 | assert | continue | wei | ada | min_int256 | min_int128 | chainid | max_decimal | default | indexed | selfdestruct | lovelace | immutable | throw | kwei | max_int128 | while | constant | ___default___ | balance | twei | codesize | false | max_int256 | _default_ | init | mwei | if | ____default____ | true | payable | internal | until | this | nonpayable | pass | public | nonreentrant | blockhash | max_uint256 | shannon | none | units | _init_ | ___init___ | is_contract | for | zero_wei | min_decimal | szabo | timestamp | ether | pwei | send) \\b\n"
         }
     }
 }
