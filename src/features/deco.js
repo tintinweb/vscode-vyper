@@ -9,10 +9,10 @@ const vscode = require('vscode');
 const styles = {
     foreGroundOk: vscode.window.createTextEditorDecorationType({
         dark: {
-            color: "#84f56293",
+            color: "#C0C0C0",
         },
         light: {
-            color: "#2a9b0e",
+            color: "#000000",
         },
         fontWeight: "bold"
     }),
