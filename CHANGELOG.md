@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.11
+- new: updated syntax to vyper v0.3.x #9 - thanks @DataBeast-IT 🙌
+
 ## 0.0.10
 - fix: an issue where the compilation would fail on windows systems #4
 - update: disabled mythx.io trial code
