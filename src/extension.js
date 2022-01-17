@@ -42,49 +42,49 @@ async function onDidChange(event) {
         return;
     }
 
-    if (settings.extensionConfig().decoration.enable) {
+    if(settings.extensionConfig().decoration.enable){
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "@\\b(public|payable|modifying)\\b",
+                regex:"@\\b(public|payable|modifying|external)\\b",
                 captureGroup: 0,
             },
             {
-                regex: "\\b(send|raw_call|selfdestruct|raw_log|create_forwarder_to|blockhash)\\b",
+                regex:"\\b(send|raw_call|selfdestruct|raw_log|create_forwarder_to|blockhash)\\b",
                 captureGroup: 0,
                 hoverMessage: "❗**potentially unsafe** lowlevel call"
             },
         ], mod_deco.styles.foreGroundWarning);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "\\b(public|payable|modifying)\\b\\(",
+                regex:"\\b(public|payable|modifying|external)\\b\\(",
                 captureGroup: 1,
             },
         ], mod_deco.styles.foreGroundWarningUnderline);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "\\b(\\.balance|msg\\.[\\w]+|block\\.[\\w]+)\\b",
+                regex:"\\b(\\.balance|msg\\.[\\w]+|block\\.[\\w]+)\\b",
                 captureGroup: 0,
             }
         ], mod_deco.styles.foreGroundInfoUnderline);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "@?\\b(private|nonrentant|constant)\\b",
+                regex:"@?\\b(private|nonreentrant|constant|internal|view|pure|event)\\b",
                 captureGroup: 0,
             },
         ], mod_deco.styles.foreGroundOk);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "\\b(log)\\.",
+                regex:"\\b(log)\\.",
                 captureGroup: 1,
             },
             {
-                regex: "\\b(clear)\\b\\(",
+                regex:"\\b(clear)\\b\\(",
                 captureGroup: 1,
             },
         ], mod_deco.styles.foreGroundNewEmit);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex: "\\b(__init__|__default__)\\b",
+                regex:"\\b(__init__|__default__)\\b",
                 captureGroup: 0,
             },
         ], mod_deco.styles.boldUnderline);
