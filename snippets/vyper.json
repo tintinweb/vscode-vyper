@@ -1,5 +1,5 @@
 {
-    ".source.solidity": {
+    ".source.vyper": {
         "bitwise and": {
             "prefix": "bitand",
             "body": "bitwise_and(${1:name}, ${2:name})"
