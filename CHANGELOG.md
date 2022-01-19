@@ -1,7 +1,7 @@
 # Change Log
 
 ## 0.0.12
-- new: make available as web extension (vscode.dev).
+- new: vscode.dev support (vscode web extension) #12
   - Note: compiling vyper is not yet supported!
 
 ## 0.0.11

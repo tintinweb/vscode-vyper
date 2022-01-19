@@ -13,6 +13,8 @@ Ethereum Vyper language support for Visual Studio Code
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-vyper): `ext install tintinweb.vscode-vyper`
 
+<sup>Also available on [vscode.dev](vscode.dev)! (compilation not yet supported)</sup> 
+
 
 ## Features
 
@@ -90,11 +92,5 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 see [CHANGELOG](./CHANGELOG.md)
 
-### v0.0.10
-- fix: an issue where the compilation would fail on windows systems #4
-- update: disabled mythx.io trial code
-- update: disabled signature helper (not yet implemented)
-- update: quick code cleanup
-- fix: allow workspace relative `vyper.command` #3
 
 -----------------------------------------------------------------------------------------------------------
