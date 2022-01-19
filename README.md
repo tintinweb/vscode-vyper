@@ -13,7 +13,7 @@ Ethereum Vyper language support for Visual Studio Code
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-vyper): `ext install tintinweb.vscode-vyper`
 
-<sup>Also available on [vscode.dev](vscode.dev)! (compilation not yet supported)</sup> 
+<sup>Also available on [vscode.dev](https://vscode.dev)! (compilation not yet supported)</sup> 
 
 
 ## Features
