@@ -5,11 +5,9 @@
  * 
  * */
 const vscode = require('vscode');
-const fs = require('fs');
-const path = require("path");
 const settings = require("../../settings");
+const {BUILTINS} = require("./static.builtins");
 
-const builtinsArr = JSON.parse(fs.readFileSync(path.resolve(__dirname, './builtins.json')));
 
 function createHover(name, snippet, type) {
     function isSet(val) {
@@ -71,12 +69,12 @@ function provideHoverHandler(document, position, token, type) {
 
     //console.log(word);
 
-    for (const snippet in builtinsArr) {
+    for (const snippet in BUILTINS) {
         if (
-            builtinsArr[snippet].prefix == word ||
-            builtinsArr[snippet].hover == word
+            BUILTINS[snippet].prefix == word ||
+            BUILTINS[snippet].hover == word
         ) {
-            return createHover(snippet, builtinsArr[snippet], type);
+            return createHover(snippet, BUILTINS[snippet], type);
         }
     }
 }

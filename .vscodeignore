@@ -1,0 +1,11 @@
+**/*.ts
+**/tsconfig.json
+!file.ts
+**/*.zip
+*.gitignore
+*.py
+*.vsix
+**/.vscode/**
+**/tmp/**
+**/test/**
+**/webpack/**
