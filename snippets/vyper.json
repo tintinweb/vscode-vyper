@@ -1,45 +1,188 @@
 {
-	".source.solidity": {
-
-        "mapping declaration":{
-            "prefix": "mapping",
-			"body": "map(${1:type}, ${2:type})"
+    ".source.vyper": {
+        "bitwise and": {
+            "prefix": "bitand",
+            "body": "bitwise_and(${1:name}, ${2:name})"
         },
-        "struct declaration":{
+        "bitwise not": {
+            "prefix": "bitnot",
+            "body": "bitwise_not(${1:name})"
+        },
+        "bitwise or": {
+            "prefix": "bitor",
+            "body": "bitwise_or(${1:name}, ${2:name})"
+        },
+        "bitwise xor": {
+            "prefix": "bitxor",
+            "body": "bitwise_xor(${1:name}, ${2:name})"
+        },
+        "shift": {
+            "prefix": "bitshift",
+            "body": "shift(${1:name}, ${2:name})"
+        },
+        "create forwarder to": {
+            "prefix": "crefwd",
+            "body": "create_forwarder_to(${1:name})"
+        },
+        "raw_call": {
+            "prefix": "rawcall",
+            "body": "raw_call(${1:address},\n${2:data},\n${3:max_outsize},\n${4:gas},\n${5:value},\n${6:is_delegate_call},${7:is_static_call}) "
+        },
+        "raw_log": {
+            "prefix": "rawlog",
+            "body": "raw_log([${1:topic}], [${2:data}])"
+        },
+        "selfdestruct": {
+            "prefix": "selfdestruct",
+            "body": "selfdestruct(${1:address})"
+        },
+        "send": {
+            "prefix": "send",
+            "body": "send(${1:address}, ${2:value})"
+        },
+        "ecadd": {
+            "prefix": "ecadd",
+            "body": "ecadd(${1:value}, ${2:value})"
+        },
+        "ecmul": {
+            "prefix": "ecmul",
+            "body": "ecmul(${1:value}, ${2:value})"
+        },
+        "ecrecover": {
+            "prefix": "ecrecover",
+            "body": "ecrecover(${1:value}, ${2:value}, ${3:value}, ${4:value})"
+        },
+        "keccak256": {
+            "prefix": "keccak256",
+            "body": "keccak256(${1:value})"
+        },
+        "sha256": {
+            "prefix": "sha256",
+            "body": "sha256(${1:value})"
+        },
+        "mapping declaration": {
+            "prefix": "mapping",
+            "body": "map(${1:type}, ${2:type})"
+        },
+        "HashMap declaration": {
+            "prefix": "hashmap",
+            "body": "HashMap(${1:type}, ${2:type})"
+        },
+        "DynArray declaration": {
+            "prefix": "dynarray",
+            "body": "DynArray(${1:type}, ${2:value})"
+        },
+        "concat declaration": {
+            "prefix": "concatdec",
+            "body": "concat(${1:value}, ${2:value}, ${3:value})"
+        },
+        "convert declaration": {
+            "prefix": "convdec",
+            "body": "convert(${1:name}: ${2:type}, ${3:type})"
+        },
+        "slice declaration": {
+            "prefix": "slicedec",
+            "body": "slice(${1:value}: ${2:value}, ${3:value})"
+        },
+        "extract32": {
+            "prefix": "extract32",
+            "body": "extract32(${1:value}, ${2:value}, ${3:type})"
+        },
+        "math abs": {
+            "prefix": "mathabs",
+            "body": "abs(${1:value})"
+        },
+        "math ceil": {
+            "prefix": "mathceil",
+            "body": "ceil(${1:value})"
+        },
+        "math floor": {
+            "prefix": "mathfloor",
+            "body": "floor(${1:value})"
+        },
+        "math max": {
+            "prefix": "mathmax",
+            "body": "max(${1:value}, ${2:value})"
+        },
+        "math pow_mod256": {
+            "prefix": "mathpow",
+            "body": "pow_mod256(${1:value}, ${2:value})"
+        },
+        "math sqrt": {
+            "prefix": "mathsqrt",
+            "body": "sqrt(${1:value})"
+        },
+        "math uint256_addmod": {
+            "prefix": "mathaddmod",
+            "body": "uint256_addmod(${1:value}, ${2:value}, ${3:value})"
+        },
+        "math uint256_mulmod": {
+            "prefix": "mathmulmod",
+            "body": "uint256_mulmod(${1:value}, ${2:value}, ${3:value})"
+        },
+        "util as_wei_value": {
+            "prefix": "utlaswei",
+            "body": "as_wei_value(${1:value}, ${2:type})"
+        },
+        "util ablockhash": {
+            "prefix": "utlblockhash",
+            "body": "blockhash(${1:value})"
+        },
+        "util empty": {
+            "prefix": "utlempty",
+            "body": "empty(${1:value})"
+        },
+        "util len": {
+            "prefix": "utllen",
+            "body": "len(${1:value}, ${2:type})"
+        },
+        "util method_id": {
+            "prefix": "utlmethodid",
+            "body": "method_id(${1:value}, ${2:type})"
+        },
+        "util abi_encode": {
+            "prefix": "utlabiencode",
+            "body": "abi_encode(${1:args}, ${2:value}, ${3:value}, ${4:value})"
+        },
+        "list declaration": {
+            "prefix": "listdec",
+            "body": "${1:name}: ${2:type}[${2:value}]"
+        },
+        "struct declaration": {
             "prefix": "struct",
-			"body": "struct ${1:name}:\n\t${2:name}: ${3:type}$0\n\t$0\n"
+            "body": "struct ${1:name}:\n\t${2:name}: ${3:type}$0\n\t$0\n"
         },
         "constructor declaration": {
-			"prefix": "__i",
-			"body": "@public\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
+            "prefix": "__i",
+            "body": "@external\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "constructor declaration 2": {
-			"prefix": "constructor",
-			"body": "@public\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
+            "prefix": "constructor",
+            "body": "@external\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "fallback function declaration": {
-			"prefix": "fallback",
-			"body": "@public\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
+            "prefix": "fallback",
+            "body": "@external\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "default function declaration": {
-			"prefix": "__d",
-			"body": "@public\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
-		},
+            "prefix": "__d",
+            "body": "@external\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
         "function declaration": {
             "prefix": "def",
-            "body": "def ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function declaration 2": {
-            "prefix": "function",
-            "body": "def ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "prefix": "func",
+            "body": "@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function payable declaration": {
             "prefix": "funcpay",
-            "body": "@public\n@payable\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@external\n@payable\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
-        "function private declaration": {
-            "prefix": "funcpriv",
-            "body": "@private\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        "function internal declaration": {
+            "prefix": "funcint",
+            "body": "@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function constant declaration": {
             "prefix": "funcconst",
@@ -47,39 +190,47 @@
         },
         "function nonreentrant declaration": {
             "prefix": "funcnonrentant",
-            "body": "@public\n@nonrentant(<unique_key>)\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
-		},
-        "log event call": {
-			"prefix": "log",
-            "body": "log.${1:name}(${2:variable}, ${3:variable})"
+            "body": "@external\n@nonrentant(<unique_key>)\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
-        "emit event call": {
-			"prefix": "emit",
+        "function viewonly declaration": {
+            "prefix": "funcview",
+            "body": "@external\n@view\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "log event call": {
+            "prefix": "log",
             "body": "log.${1:name}(${2:variable}, ${3:variable})"
         },
         "event declaration": {
-			"prefix": "event",
-			"body": "${1:name}: event({${2:name}: ${3:type}, ${4:name}: ${5:type},})"
+            "prefix": "event",
+            "body": "${1:name}: event({${2:name}: ${3:type}, ${4:name}: ${5:type},})"
         },
         "if else statement": {
-			"prefix": "ifelse",
-			"body": "if ${1:condition} \n\t$2\n else: \n\t$0\n"
-		},
+            "prefix": "ifelse",
+            "body": "if ${1:condition} \n\t$2\n else: \n\t$0\n"
+        },
         "for array statement": {
-			"prefix": "forarray",
-			"body": "for ${1:name} in range(len(${2:array})):\n\t$0\n"
+            "prefix": "forarray",
+            "body": "for ${1:name} in range(len(${2:array})):\n\t$0\n"
         },
         "for statement": {
-			"prefix": "for",
-			"body": "for ${1:name} in range(${2:times}):\n\t$0\n"
+            "prefix": "for",
+            "body": "for ${1:name} in range(${2:times}):\n\t$0\n"
         },
         "for start-end statement": {
-			"prefix": "for2",
-			"body": "for ${1:name} in range(${2:start}, ${3:end}):\n\t$0\n"
+            "prefix": "for2",
+            "body": "for ${1:name} in range(${2:start}, ${3:end}):\n\t$0\n"
         },
         "variable declaration": {
-			"prefix": "vardec",
-			"body": "${1:name}: ${2:type}"
+            "prefix": "vardec",
+            "body": "${1:name}: ${2:type}"
+        },
+        "public variable declaration": {
+            "prefix": "pubvardec",
+            "body": "${1:name}: public(${2:type})"
+        },
+        "constant declaration": {
+            "prefix": "constdec",
+            "body": "${1:NAME}: constant(${2:type}) = ${3:defaultValue}"
         },
         "interface implementation impl": {
             "prefix": "implements",
@@ -91,7 +242,7 @@
         },
         "interface declaration": {
             "prefix": "interface declaration",
-            "body":"contract ${1:name}:\n\tdef ${1:name}(): modifying\n\tdef ${2:name}(): -> ${3:type}: constant"
+            "body": "interface ${1:name}:\n\tdef ${1:name}(): modifying\n\tdef ${2:name}(): -> ${3:type}: constant"
         },
         "natspec sample": {
             "prefix": "natspec sample",
