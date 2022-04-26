@@ -66,11 +66,11 @@
         },
         "HashMap declaration": {
             "prefix": "hashmap",
-            "body": "HashMap(${1:type}, ${2:type})"
+            "body": "HashMap[${1:type}, ${2:type}]"
         },
         "DynArray declaration": {
             "prefix": "dynarray",
-            "body": "DynArray(${1:type}, ${2:value})"
+            "body": "DynArray[${1:type}, ${2:value}]"
         },
         "concat declaration": {
             "prefix": "concatdec",
