@@ -178,7 +178,7 @@
         },
         "function payable declaration": {
             "prefix": "funcpay",
-            "body": "@external\n@payable\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@payable\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function internal declaration": {
             "prefix": "funcint",
@@ -198,11 +198,11 @@
         },
         "function nonreentrant declaration": {
             "prefix": "funcnonrentant",
-            "body": "@external\n@nonrentant(<unique_key>)\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@nonrentant(<unique_key>)\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function external viewonly declaration": {
             "prefix": "funcview",
-            "body": "@external\n@view\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@view\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function external pure declaration": {
             "prefix": "funcpure",
