@@ -197,7 +197,11 @@ function compileActiveFileCommand(contractFile) {
             (success) => {
                 diagnosticCollections.compiler.delete(contractFile.uri);
                 diagnosticCollections.mythx.delete(contractFile.uri);
-                vscode.window.showInformationMessage('[Compiler success] ' + Object.keys(success).join(","));
+                
+                if(settings.extensionConfig().compile.verbose){
+                    vscode.window.showInformationMessage('[Compiler success] ' + Object.keys(success).join(","));
+                }
+                
 
                 // precedence: (1) vyperConfig, otherwise (2) process.env 
                 let password = settings.extensionConfig().analysis.mythx.password || process.env.MYTHX_PASSWORD;
@@ -266,7 +270,9 @@ function compileActiveFileCommand(contractFile) {
             (errormsg) => {
                 diagnosticCollections.compiler.delete(contractFile.uri);
                 diagnosticCollections.mythx.delete(contractFile.uri);
-                vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
+                if(settings.extensionConfig().compile.verbose){
+                    vscode.window.showErrorMessage('[Compiler Error] ' + errormsg);
+                }
                 let lineNr = 1; // add default errors to line 0 if not known
                 let matches = /(?:line\s+(\d+))/gm.exec(errormsg);
                 if (matches && matches.length == 2) {

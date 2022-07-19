@@ -73,6 +73,11 @@
                     "default": true,
                     "description": "Automatically compile when saving and annotate code with compile results."
                 },
+                "vyper.compile.verbose": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "Enable/Suppress Compiler Success/Error Information Popup Messages. Compiler errors will still be decorated in the editor."
+                },
                 "vyper.mode.active": {
                     "type": "boolean",
                     "default": true,
