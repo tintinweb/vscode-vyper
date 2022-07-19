@@ -66,11 +66,11 @@
         },
         "HashMap declaration": {
             "prefix": "hashmap",
-            "body": "HashMap(${1:type}, ${2:type})"
+            "body": "HashMap[${1:type}, ${2:type}]"
         },
         "DynArray declaration": {
             "prefix": "dynarray",
-            "body": "DynArray(${1:type}, ${2:value})"
+            "body": "DynArray[${1:type}, ${2:value}]"
         },
         "concat declaration": {
             "prefix": "concatdec",
@@ -178,11 +178,19 @@
         },
         "function payable declaration": {
             "prefix": "funcpay",
-            "body": "@external\n@payable\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@payable\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function internal declaration": {
             "prefix": "funcint",
             "body": "@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function internal viewonly declaration": {
+            "prefix": "funcintview",
+            "body": "@view\n@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function internal pure declaration": {
+            "prefix": "funcintpure",
+            "body": "@pure\n@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function constant declaration": {
             "prefix": "funcconst",
@@ -190,11 +198,15 @@
         },
         "function nonreentrant declaration": {
             "prefix": "funcnonrentant",
-            "body": "@external\n@nonrentant(<unique_key>)\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@nonrentant(<unique_key>)\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
-        "function viewonly declaration": {
+        "function external viewonly declaration": {
             "prefix": "funcview",
-            "body": "@external\n@view\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "body": "@view\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function external pure declaration": {
+            "prefix": "funcpure",
+            "body": "@pure\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "log event call": {
             "prefix": "log",
