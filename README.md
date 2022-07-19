@@ -15,7 +15,6 @@ Ethereum Vyper language support for Visual Studio Code
 
 <sup>Also available on [vscode.dev](https://vscode.dev)! (compilation not yet supported)</sup> 
 
-
 ## Features
 
 #### Passive Features
@@ -82,6 +81,11 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 ## Extension Settings
 
 <img width="600" alt="settings" src="https://user-images.githubusercontent.com/2865694/54860098-67a48d00-4d15-11e9-951e-e8422bc3fae5.png">
+
+## FAQ
+
+* **Q**: I get an error running vyper on my macbook with M1/M2 chipset.
+* **A**: The extension executes the vyper compiler in a `/bin/sh` shell that may not have all the customizations you are using in your day-to-day shell/terminal. As a workaround, I suggest to set the setting:`vyper.command` to `arch -x86_64 vyper`. see #18
 
 ## Developer Notes
 
