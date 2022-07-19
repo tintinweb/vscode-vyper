@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.14
+- new: suppress compiler error/success popup boxes by default. can be re-enabled by setting `vyper.compile.verbose = true`
+- update: snippets to fit vyper 0.3.x #19 - thanks @msugarm
+- update: dependencies
+
 ## 0.0.13 - 0.0.12
 - new: vscode.dev support (vscode web extension) #12
   - Note: compiling vyper is not yet supported!
