@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.0.15
+- fix: typo in snippet `funcnonreentrant` #25
+
 ## 0.0.14
 - new: suppress compiler error/success popup boxes by default. can be re-enabled by setting `vyper.compile.verbose = true`
 - update: snippets to fit vyper 0.3.x #19 - thanks @msugarm
