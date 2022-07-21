@@ -197,8 +197,8 @@
             "body": "@constant\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
         },
         "function nonreentrant declaration": {
-            "prefix": "funcnonrentant",
-            "body": "@nonrentant(<unique_key>)\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+            "prefix": "funcnonreentrant",
+            "body": "@(nonreentrant\"${1:lock}\")\n@external\ndef ${2:name}(${3:_name}: ${4:type}):\n\t$0\n"
         },
         "function external viewonly declaration": {
             "prefix": "funcview",
