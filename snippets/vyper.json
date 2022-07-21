@@ -198,7 +198,7 @@
         },
         "function nonreentrant declaration": {
             "prefix": "funcnonreentrant",
-            "body": "@(nonreentrant\"${1:lock}\")\n@external\ndef ${2:name}(${3:_name}: ${4:type}):\n\t$0\n"
+            "body": "@nonreentrant(\"${1:lock}\")\n@external\ndef ${2:name}(${3:_name}: ${4:type}):\n\t$0\n"
         },
         "function external viewonly declaration": {
             "prefix": "funcview",
