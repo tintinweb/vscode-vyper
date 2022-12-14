@@ -210,11 +210,11 @@
         },
         "log event call": {
             "prefix": "log",
-            "body": "log.${1:name}(${2:variable}, ${3:variable})"
+            "body": "log ${1:name}(${2:variable}, ${3:variable})"
         },
         "event declaration": {
             "prefix": "event",
-            "body": "${1:name}: event({${2:name}: ${3:type}, ${4:name}: ${5:type},})"
+            "body": "event ${1:name}:\n\t${2:name}: ${3:type}\n\t${4:name}: ${5:type}"
         },
         "if else statement": {
             "prefix": "ifelse",
@@ -222,7 +222,7 @@
         },
         "for array statement": {
             "prefix": "forarray",
-            "body": "for ${1:name} in range(len(${2:array})):\n\t$0\n"
+            "body": "for ${1:name} in ${2:array}:\n\t$0\n"
         },
         "for statement": {
             "prefix": "for",
@@ -254,7 +254,7 @@
         },
         "interface declaration": {
             "prefix": "interface declaration",
-            "body": "interface ${1:name}:\n\tdef ${1:name}(): modifying\n\tdef ${2:name}(): -> ${3:type}: constant"
+            "body": "interface ${1:name}:\n\tdef ${1:name}(): nonpayable\n\tdef ${2:name}() -> ${3:type}: view"
         },
         "natspec sample": {
             "prefix": "natspec sample",
