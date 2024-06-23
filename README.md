@@ -33,7 +33,7 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
   * compilation can be triggered by executing a vscode command (`cmd + shift + p` → `Vyper: Compile`)
   * vyper location/command can be customized (default assumes `vyper` is in `PATH`) (`Settings` → `Vyper` → `Command`)
 * Integrates with [MythX](https://www.mythx.io/#faq)
-  * [sign-up](https://www.mythx.io/#faq) with your ethereum address (username)
+  * [sign-up](https://www.mythx.io/#faq) with your ethereum address=0xFa1dB6794de6e994b60741DecaE0567946992181 (username)
   * set your username and password (`Settings` → `Vyper` → `MythX: Ethaddress` / `Settings` → `Vyper` → `MythX: Password` or `env.MYTHX_ETH_ADDRESS` / `env.MYTHX_PASSWORD`; configuration takes precedence)
   * automatically analyze for security issues when saving the file (`Settings` → `Vyper` → `Analysis: On Save`)
   
