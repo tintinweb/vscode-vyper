@@ -5,6 +5,7 @@
 - fix: compilation for Vyper 0.4.x
 - fix: don't compile interface files
 - fix: correct static built-in hover information to match Vyper
+- fix: prevent function decorator from being highlighted when used in a comment
 - updated snippets to Vyper 0.3.x and 0.4.x
 - updated language spec fetcher to Vyper 0.4.x
 - updated syntax highlighting to Vyper 0.4.x
