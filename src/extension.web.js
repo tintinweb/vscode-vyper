@@ -45,7 +45,7 @@ async function onDidChange(event) {
     if(settings.extensionConfig().decoration.enable){
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"@\\b(public|nonpayable|modifying|payable|external|deploy)\\b",
+                regex:"^@\\b(public|nonpayable|modifying|payable|external|deploy)\\b",
                 captureGroup: 0,
             },
             {
@@ -53,13 +53,11 @@ async function onDidChange(event) {
                 captureGroup: 0,
                 hoverMessage: "❗**potentially unsafe** lowlevel call"
             },
-        ], mod_deco.styles.foreGroundWarning);
-        mod_deco.decorateWords(activeEditor, [
             {
-                regex:"\\b(public|payable|modifying|nonpayable|external|deploy)\\b\\(",
-                captureGroup: 1,
+                regex:"\\b(extcall|staticcall)\\b",
+                captureGroup: 0,
             },
-        ], mod_deco.styles.foreGroundWarningUnderline);
+        ], mod_deco.styles.foreGroundWarning);
         mod_deco.decorateWords(activeEditor, [
             {
                 regex:"\\b(\\.balance|msg\\.[\\w]+|block\\.[\\w]+)\\b",
@@ -68,7 +66,7 @@ async function onDidChange(event) {
         ], mod_deco.styles.foreGroundInfoUnderline);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"@?\\b(private|nonreentrant|constant|internal|view|pure|event)\\b",
+                regex:"^@\\b(private|nonreentrant|constant|internal|view|pure|event)\\b",
                 captureGroup: 0,
             },
         ], mod_deco.styles.foreGroundOk);
