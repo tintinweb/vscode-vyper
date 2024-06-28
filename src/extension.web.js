@@ -25,7 +25,14 @@ var activeEditor;
 /** event funcs */
 async function onDidSave(document) {
     if (document.languageId != settings.LANGUAGE_ID) {
-        console.log("langid mismatch");
+        console.log("Language ID mismatch");
+        return;
+    }
+
+    const fileExtension = document.fileName.split('.').pop();
+        
+    if (fileExtension != "vy") {
+        console.log("Skipping compilation for interface file");
         return;
     }
 }
@@ -38,18 +45,18 @@ async function onDidChange(event) {
     if(settings.extensionConfig().decoration.enable){
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"@\\b(public|payable|modifying|external)\\b",
+                regex:"@\\b(public|nonpayable|modifying|payable|external|deploy)\\b",
                 captureGroup: 0,
             },
             {
-                regex:"\\b(send|raw_call|selfdestruct|raw_log|create_forwarder_to|blockhash)\\b",
+                regex:"\\b(send|raw_call|selfdestruct|create_forwarder_to|create_minimal_proxy_to|create_copy_of|create_from_blueprint)\\b",
                 captureGroup: 0,
                 hoverMessage: "❗**potentially unsafe** lowlevel call"
             },
         ], mod_deco.styles.foreGroundWarning);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"\\b(public|payable|modifying|external)\\b\\(",
+                regex:"\\b(public|payable|modifying|nonpayable|external|deploy)\\b\\(",
                 captureGroup: 1,
             },
         ], mod_deco.styles.foreGroundWarningUnderline);
@@ -104,7 +111,7 @@ function onActivate(context) {
         vscode.languages.setLanguageConfiguration(type, {
             onEnterRules: [
                 {
-                    beforeText: /^\s*(?:struct|def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\s*$/,
+                    beforeText: /^\s*(?:struct|enum|flag|event|interface|def|class|for|if|elif|else).*?:\s*$/,
                     action: { indentAction: vscode.IndentAction.Indent }
                 }
             ]

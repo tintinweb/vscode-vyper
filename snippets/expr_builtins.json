@@ -1,0 +1,104 @@
+{
+    ".source.vyper": {
+        "ecadd": {
+            "prefix": "ecadd",
+            "body": "ecadd(${1:a}, ${2:b})"
+        },
+        "ecmul": {
+            "prefix": "ecmul",
+            "body": "ecmul(${1:a}, ${2:b})"
+        },
+        "ecrecover": {
+            "prefix": "ecrecover",
+            "body": "ecrecover(${1:hash}, ${2:v}, ${3:r}, ${4:s})"
+        },
+        "keccak256": {
+            "prefix": "keccak256",
+            "body": "keccak256(${1:value})"
+        },
+        "sha256": {
+            "prefix": "sha256",
+            "body": "sha256(${1:value})"
+        },
+        "concat": {
+            "prefix": "concat",
+            "body": "concat(${1:value}, ${2:value}, ${3:value})"
+        },
+        "convert": {
+            "prefix": "convert",
+            "body": "convert(${1:name}: ${2:type}, ${3:type})"
+        },
+        "slice": {
+            "prefix": "slice",
+            "body": "slice(${1:value}: ${2:start}, ${3:length})"
+        },
+        "extract32": {
+            "prefix": "extract32",
+            "body": "extract32(${1:value}, ${2:start})"
+        },
+        "math abs": {
+            "prefix": ["abs", "mathabs"],
+            "body": "abs(${1:value})"
+        },
+        "math ceil": {
+            "prefix": ["ceil", "mathceil"],
+            "body": "ceil(${1:value})"
+        },
+        "math floor": {
+            "prefix": ["floor", "mathfloor"],
+            "body": "floor(${1:value})"
+        },
+        "math max": {
+            "prefix": ["max", "mathmax"],
+            "body": "max(${1:value}, ${2:value})"
+        },
+        "math min": {
+            "prefix": ["min", "mathmin"],
+            "body": "min(${1:value}, ${2:value})"
+        },
+        "math pow_mod256": {
+            "prefix": ["pow_mod256", "mathpow"],
+            "body": "pow_mod256(${1:value}, ${2:value})"
+        },
+        "math sqrt": {
+            "prefix": ["sqrt", "mathsqrt"],
+            "body": "sqrt(${1:value})"
+        },
+        "math uint256_addmod": {
+            "prefix": ["uint256_addmod", "addmod"],
+            "body": "uint256_addmod(${1:value}, ${2:value}, ${3:value})"
+        },
+        "math uint256_mulmod": {
+            "prefix": ["uint256_mulmod", "mulmod"],
+            "body": "uint256_mulmod(${1:value}, ${2:value}, ${3:value})"
+        },
+        "as_wei_value": {
+            "prefix": "as_wei_value",
+            "body": "as_wei_value(${1:value}, ${2:unit})"
+        },
+        "blockhash": {
+            "prefix": "blockhash",
+            "body": "blockhash(${1:value})"
+        },
+        "empty": {
+            "prefix": "empty",
+            "body": "empty(${1:value})"
+        },
+        "len": {
+            "prefix": "len",
+            "body": "len(${1:value}})"
+        },
+        "method_id": {
+            "prefix": "method_id",
+            "body": "method_id(${1:value}, output_type=${2:type})"
+        },
+        "abi_encode": {
+            "prefix": ["abi_encode", "abi.encode"],
+            "body": "abi_encode(${1:args}, ${2:value}, ${3:value}, ${4:value})"
+        },
+        "abi_decode": {
+            "prefix": ["abi_decode", "abi.decode"],
+            "body": "abi_decode(${1:data}, ${2:output_type})"
+        }
+    }
+}

@@ -35,7 +35,7 @@ function createHover(name, snippet, type) {
 
     if (text.length > 0) text.push("");
     if (isSet(snippet.description)) {
-        var txt_descr = snippet.description instanceof Array ? snippet.description.join("\n ") : snippet.description;
+        var txt_descr = snippet.description instanceof Array ? snippet.description.join("\n* ") : snippet.description;
         text.push("💡 " + txt_descr);
     }
 

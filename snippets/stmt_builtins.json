@@ -1,0 +1,44 @@
+{
+    ".source.vyper": {
+        "create minimal proxy to": {
+            "prefix": "create_minimal_proxy_to",
+            "body": "create_minimal_proxy_to(${1:target})"
+        },
+        "create copy of": {
+            "prefix": "create_copy_of",
+            "body": "create_copy_of(${1:target})"
+        },
+        "create from blueprint": {
+            "prefix": "create_from_blueprint",
+            "body": "create_from_blueprint(${1:target})"
+        },
+        "raw_call": {
+            "prefix": "raw_call",
+            "body": "raw_call(${1:to}, ${2:data}, max_outsize=${3:max_outsize}) "
+        },
+        "raw_delegatecall": {
+            "prefix": ["raw_call", "delegatecall"],
+            "body": "raw_call(${1:to}, ${2:data}, max_outsize=${3:max_outsize}, is_delegate_call=True) "
+        },
+        "raw_staticcall": {
+            "prefix": ["raw_call", "staticcall"],
+            "body": "raw_call(${1:to}, ${2:data}, max_outsize=${3:max_outsize}, is_static_call=True) "
+        },
+        "raw_log": {
+            "prefix": "raw_log",
+            "body": "raw_log([${1:topic}], ${2:data})"
+        },
+        "raw_revert": {
+            "prefix": "raw_revert",
+            "body": "raw_revert(${1:data})"
+        },
+        "selfdestruct": {
+            "prefix": "selfdestruct",
+            "body": "selfdestruct(${1:address})"
+        },
+        "send": {
+            "prefix": "send",
+            "body": "send(${1:address}, ${2:value})"
+        }
+    }
+}

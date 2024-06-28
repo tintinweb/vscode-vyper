@@ -28,18 +28,14 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 * Provides Security augmented decorations (`Settings` → `Vyper` → `Decoration: Enable`)
 * Provides Hover information (`Settings` → `Vyper` → `Hover: Enable`)
 * Provides Code snippets for common language constructs
-* Integrates with the vyper compiler (based on `truffle-compile-vyper`)
+* Integrates with the vyper compiler
   * automatically compile contracts on save (`Settings` → `Vyper` → `Compile: On Save`)
   * compilation can be triggered by executing a vscode command (`cmd + shift + p` → `Vyper: Compile`)
   * vyper location/command can be customized (default assumes `vyper` is in `PATH`) (`Settings` → `Vyper` → `Command`)
-* Integrates with [MythX](https://www.mythx.io/#faq)
-  * [sign-up](https://www.mythx.io/#faq) with your ethereum address (username)
-  * set your username and password (`Settings` → `Vyper` → `MythX: Ethaddress` / `Settings` → `Vyper` → `MythX: Password` or `env.MYTHX_ETH_ADDRESS` / `env.MYTHX_PASSWORD`; configuration takes precedence)
-  * automatically analyze for security issues when saving the file (`Settings` → `Vyper` → `Analysis: On Save`)
-  
+
 ## Requirements
 
-* It is assumed that vyper is installed and generally available on the system (`pip install vyper`). In case vyper is not available in path or called in a virtualenv configure the vyper command in `Settings` → `Vyper` → `Command`
+* It is assumed that vyper is installed and generally available on the system (`pip3 install vyper`). In case vyper is not available in path or called in a virtualenv configure the vyper command in `Settings` → `Vyper` → `Command`
 
 ## Tour
 
@@ -69,7 +65,7 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 #### Snippets
 
-* Quickly create `constructor`, `fallback` function, `methods`, `structs`, ... as you type. Select the snippet from the suggestion box. See [snippets/vyper.json](./snippets/vyper.json) for a list of available snippets.
+* Quickly create `constructor`, `fallback` function, `methods`, `structs`, ... as you type. Select the snippet from the suggestion box. See [snippets/](./snippets/) for a list of available snippets.
 * start typing ...
 
 <img width="600" alt="image" src="https://user-images.githubusercontent.com/2865694/54860223-6e340400-4d17-11e9-8b21-49deed0db4db.png">
@@ -86,6 +82,9 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 
 * **Q**: I get an error running vyper on my macbook with M1/M2 chipset.
 * **A**: The extension executes the vyper compiler in a `/bin/sh` shell that may not have all the customizations you are using in your day-to-day shell/terminal. As a workaround, I suggest to set the setting:`vyper.command` to `arch -x86_64 vyper`. see #18
+
+* **Q**: My project uses Vyper 0.3.x and import some interfaces from other contracts. but the extension does not recognize them and output `FileNotFoundError: Cannot locate interface 'interface/my_interface{.vy,.json}`.
+* **A** The extension compiles your file with the command `vyper`. You should set the setting: `vyper.command` to `vyper -p path/to/your/project/directory` to make the compiler aware of the interfaces in your project.
 
 ## Developer Notes
 
