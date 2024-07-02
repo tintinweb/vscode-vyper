@@ -35,7 +35,8 @@ class VyperLang:
         "deploy",
         "nonpayable",
         "payable",
-        "external" + "modifying",
+        "external",
+        "modifying",
     ]  # modifying kept for backward compatibility
     var_types_ref = [
         "struct",
