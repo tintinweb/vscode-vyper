@@ -1737,23 +1737,23 @@
                 },
                 {
                     "name": "support.function.builtin.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    abi_encode | abi_decode | _abi_encode | _abi_decode | floor | ceil | convert | slice | len | concat | sha256 | method_id | keccak256 | ecrecover | ecadd | ecmul | extract32 | as_wei_value | raw_call | blockhash | blobhash | bitwise_and | bitwise_or | bitwise_xor | bitwise_not | uint256_addmod | uint256_mulmod | unsafe_add | unsafe_sub | unsafe_mul | unsafe_div | pow_mod256 | uint2str | isqrt | sqrt | shift | create_minimal_proxy_to | create_forwarder_to | create_copy_of | create_from_blueprint | min | max | empty | abs | min_value | max_value | epsilon   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n abi_encode | abi_decode | _abi_encode | _abi_decode | floor | ceil | convert | slice | len | concat | sha256 | method_id | keccak256 | ecrecover | ecadd | ecmul | extract32 | as_wei_value | raw_call | blockhash | blobhash | bitwise_and | bitwise_or | bitwise_xor | bitwise_not | uint256_addmod | uint256_mulmod | unsafe_add | unsafe_sub | unsafe_mul | unsafe_div | pow_mod256 | uint2str | isqrt | sqrt | shift | create_minimal_proxy_to | create_forwarder_to | create_copy_of | create_from_blueprint | min | max | empty | abs | min_value | max_value | epsilon)\\b\n"
                 },
                 {
                     "name": "support.function.builtin.lowlevel.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    send | print | breakpoint | selfdestruct | raw_call | raw_log | raw_revert | create_minimal_proxy_to | create_forwarder_to | create_copy_of | create_from_blueprint   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n send | print | breakpoint | selfdestruct | raw_call | raw_log | raw_revert | create_minimal_proxy_to | create_forwarder_to | create_copy_of | create_from_blueprint)\\b\n"
                 },
                 {
                     "name": "support.type.reference.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    struct | enum | flag | event | interface | HashMap | DynArray | Bytes | String   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n struct | enum | flag | event | interface | HashMap | DynArray | Bytes | String)\\b\n"
                 },
                 {
                     "name": "support.function.builtin.modifiers.safe.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    nonreentrant | internal | view | pure | private | constant   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n nonreentrant | internal | view | pure | private | immutable | constant)\\b\n"
                 },
                 {
                     "name": "support.function.builtin.modifiers.unsafe.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    deploy | nonpayable | payable | externalmodifying   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n deploy | nonpayable | payable | externalmodifying)\\b\n"
                 }
             ]
         },
@@ -1765,11 +1765,11 @@
                 },
                 {
                     "name": "support.type.basetype.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    uint200 | uint256 | int8 | uint40 | uint232 | bytes17 | uint104 | uint128 | uint56 | int176 | bytes32 | bytes12 | int120 | uint120 | int32 | uint112 | int16 | bytes4 | uint144 | bytes10 | bytes13 | uint32 | bytes20 | uint72 | bytes15 | int80 | int160 | int96 | decimal | uint136 | int192 | int240 | int200 | int104 | int152 | uint64 | uint24 | bytes6 | bytes30 | int224 | bytes25 | bytes28 | int208 | HashMap | int56 | address | uint208 | Bytes | int128 | int24 | uint184 | uint80 | bytes23 | uint88 | uint216 | int136 | int232 | uint48 | bytes18 | bytes11 | int40 | int168 | int184 | bytes26 | bytes29 | bool | int248 | uint152 | bytes1 | int64 | uint96 | int112 | int216 | bytes24 | uint240 | uint160 | int72 | String | bytes19 | int48 | uint248 | uint16 | bytes31 | bytes3 | bytes22 | bytes7 | bytes2 | bytes14 | uint176 | int88 | bytes9 | uint224 | uint8 | bytes5 | bytes21 | DynArray | uint168 | int144 | bytes16 | uint192 | bytes8 | int256 | bytes27   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n HashMap | uint120 | bytes31 | int16 | int144 | uint232 | bytes17 | uint48 | bytes5 | bool | uint248 | Bytes | uint24 | uint72 | int232 | bytes2 | int112 | uint80 | int56 | int168 | bytes26 | uint56 | int72 | bytes22 | uint192 | int224 | uint216 | bytes27 | address | int208 | bytes23 | uint16 | int216 | int24 | int8 | int96 | int200 | bytes3 | bytes10 | int136 | int32 | int48 | uint240 | int160 | int176 | bytes9 | bytes30 | int256 | int192 | bytes7 | uint104 | bytes12 | int240 | uint224 | bytes25 | uint112 | bytes28 | DynArray | bytes32 | int88 | bytes20 | uint8 | uint256 | bytes4 | uint160 | bytes21 | int152 | String | int64 | bytes14 | bytes29 | uint168 | bytes11 | int80 | int184 | bytes19 | bytes24 | bytes15 | uint200 | uint208 | uint176 | bytes18 | decimal | uint128 | uint144 | uint64 | uint88 | uint152 | bytes6 | int104 | uint32 | bytes8 | int128 | bytes1 | int40 | bytes16 | int248 | uint40 | uint184 | int120 | uint136 | bytes13 | uint96)\\b\n"
                 },
                 {
                     "name": "support.type.keywords.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    del | babbage | true | lovelace | is | shannon | for | default | nonlocal | false | from | struct | enum | max_uint256 | def | pwei | return | if | import | min_decimal | flagunreachable | ether | while | as | payable | with | event | init | interface | not | async | immutable | try | nonpayable | lambda | global | assert | ____init____ | zero_address | or | pass | transient | constant | yield | gwei | twei | empty_bytes32 | szabo | raise | finally | class | ada | wei | else | zero_wei | max_decimal | elif | _init_ | except | await | break | ___default___ | and | none | _default_ | indexed | finney | kwei | nonreentrant | range | mwei | in | ___init___ | max_int128 | external | public | ____default____ | internal | min_int128 | continue   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n _default_ | payable | nonreentrant | for | ether | import | with | enum | public | global | wei | lambda | empty_bytes32 | from | yield | gwei | event | transient | pwei | szabo | internal | continue | and | pass | while | init | if | babbage | async | immutable | interface | kwei | finally | min_decimal | or | none | ___init___ | max_uint256 | zero_wei | finney | max_decimal | return | elif | false | default | ____default____ | flagunreachable | struct | def | except | nonpayable | del | twei | true | range | raise | class | lovelace | indexed | min_int128 | external | try | as | not | assert | constant | break | ____init____ | ada | is | await | max_int128 | else | zero_address | mwei | ___default___ | nonlocal | _init_ | in | shannon)\\b\n"
                 },
                 {
                     "name": "support.type.constant.vyper",
@@ -1777,7 +1777,7 @@
                 },
                 {
                     "name": "entity.other.inherited-class.modules.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    implements | uses | initializes | exports   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n implements | uses | initializes | exports)\\b\n"
                 }
             ]
         },
@@ -4273,37 +4273,41 @@
             "patterns": [
                 {
                     "name": "variable.language.special.log.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    log   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n log)\\b\n"
                 },
                 {
                     "name": "variable.language.special.msg.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    msg   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n msg)\\b\n"
                 },
                 {
                     "name": "variable.language.special.block.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    block   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n block)\\b\n"
                 },
                 {
                     "name": "variable.language.special.tx.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    tx   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n tx)\\b\n"
                 },
                 {
                     "name": "variable.language.special.chain.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    chain   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n chain)\\b\n"
                 },
                 {
                     "name": "variable.language.special.extcall.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    extcall   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n extcall)\\b\n"
                 },
                 {
                     "name": "variable.language.special.staticcall.vyper",
-                    "match": "(?x)\n  (?<!\\.) \\b(\n    staticcall   )\\b\n"
+                    "match": "(?x)\n  (?<!\\.) \\b(\n staticcall)\\b\n"
+                },
+                {
+                    "name": "variable.language.special.__interface__.vyper",
+                    "match": "(?x)\n  \\b (__interface__) \\b\n"
                 }
             ]
         },
         "reserved-names-vyper": {
             "name": "name.reserved.vyper",
-            "match": "(?x)\n  \\b (del | babbage | true | lovelace | is | shannon | for | default | nonlocal | false | from | struct | enum | max_uint256 | def | pwei | return | if | import | min_decimal | flagunreachable | ether | while | as | payable | with | event | init | interface | not | async | immutable | try | nonpayable | lambda | global | assert | ____init____ | zero_address | or | pass | transient | constant | yield | gwei | twei | empty_bytes32 | szabo | raise | finally | class | ada | wei | else | zero_wei | max_decimal | elif | _init_ | except | await | break | ___default___ | and | none | _default_ | indexed | finney | kwei | nonreentrant | range | mwei | in | ___init___ | max_int128 | external | public | ____default____ | internal | min_int128 | continue) \\b\n"
+            "match": "(?x)\n  \\b (_default_ | payable | nonreentrant | for | ether | import | with | enum | public | global | wei | lambda | empty_bytes32 | from | yield | gwei | event | transient | pwei | szabo | internal | continue | and | pass | while | init | if | babbage | async | immutable | interface | kwei | finally | min_decimal | or | none | ___init___ | max_uint256 | zero_wei | finney | max_decimal | return | elif | false | default | ____default____ | flagunreachable | struct | def | except | nonpayable | del | twei | true | range | raise | class | lovelace | indexed | min_int128 | external | try | as | not | assert | constant | break | ____init____ | ada | is | await | max_int128 | else | zero_address | mwei | ___default___ | nonlocal | _init_ | in | shannon) \\b\n"
         }
     }
 }

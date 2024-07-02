@@ -1,6 +1,6 @@
 # Change Log
 
-## 0.0.16
+## 0.1.0
 - new: logo for Vyper files in the explorer view
 - fix: compilation for Vyper 0.4.x
 - fix: don't compile interface files

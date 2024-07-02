@@ -86,6 +86,9 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 * **Q**: My project uses Vyper 0.3.x and import some interfaces from other contracts. but the extension does not recognize them and output `FileNotFoundError: Cannot locate interface 'interface/my_interface{.vy,.json}`.
 * **A** The extension compiles your file with the command `vyper`. You should set the setting: `vyper.command` to `vyper -p path/to/your/project/directory` to make the compiler aware of the interfaces in your project.
 
+* **Q** My multi-module project uses Vyper 0.4.x and while the extension does not report compilation error for any files, when compiling the project with the Vyper cli or some framework such as `ape`, `foundry` or `titanoboa`, it fails with some issue about modules usage/initialization.
+* **A** In 0.4.x, A Vyper modules might be valid when being imported but not a valid standalone contracts to compile into bytecode. Hence the extension stops the compilation at the ``annotated_ast` phase, before the global constraint checker. For more info see https://github.com/vyperlang/vyper/pull/3810.
+
 ## Developer Notes
 
 * install vyper `pip3 install vyper`

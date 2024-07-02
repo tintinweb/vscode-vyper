@@ -12,20 +12,14 @@ from vyper.semantics.types import PRIMITIVE_TYPES
 import json
 
 
-
 class VyperLang:
     builtin_functions = DISPATCH_TABLE.keys()
     builtin_raw_functions = STMT_DISPATCH_TABLE.keys()
     base_types = set(
-        [
-            x
-            for x in PRIMITIVE_TYPES.keys()
-            if not x.startswith("$")
-        ]
+        [x for x in PRIMITIVE_TYPES.keys() if not x.startswith("$")]
     )
-    reserved_words = (
-        vyper.ast.identifiers.RESERVED_KEYWORDS
-    )
+    reserved_words = vyper.ast.identifiers.RESERVED_KEYWORDS
+    special_attributes = {"__interface__"}
     fallback_name = "__default__"
     constructor_name = "__init__"
     modifiers_safe = [
@@ -34,6 +28,7 @@ class VyperLang:
         "view",
         "pure",
         "private",
+        "immutable",
         "constant",
     ]  # private,constant for backward compatibility
     modifiers_unsafe = [
@@ -52,8 +47,7 @@ class VyperLang:
         "DynArray",
         "Bytes",
         "String",
-    ]
-    # kept for backward compatibility
+    ]  # enum kept for backward compatibility
     constants = [
         "ZERO_ADDRESS",
         "EMPTY_BYTES32",
@@ -65,10 +59,18 @@ class VyperLang:
         "MAX_UINT256",
     ]  # kept for backward compatibility
     modules = ["implements", "uses", "initializes", "exports"]
-    special_vars = ["log", "msg", "block", "tx", "chain", "extcall", "staticcall"]
+    special_vars = [
+        "log",
+        "msg",
+        "block",
+        "tx",
+        "chain",
+        "extcall",
+        "staticcall",
+    ]
 
     tmlanguage_match_wordboundary = "(?x)\n  \\b (%(match)s) \\b\n"
-    tmlanguage_match_functions = "(?x)\n  (?<!\\.) \\b(\n    %(match)s   )\\b\n"
+    tmlanguage_match_functions = "(?x)\n  (?<!\\.) \\b(\n %(match)s)\\b\n"
     tmlanguage_match_types = "(?x)\n  (?<!\\.) \\b(\n    %(match)s \n\n    (?# Although 'super' is not a type, it's related to types,\n        and is special enough to be highlighted differently from\n        other built-ins)\n    | super\n  )\\b\n"
 
     #    "name": "support.type.keywords.vyper", <--> for syntax recognition / highlighting
@@ -174,12 +176,25 @@ class VyperLang:
             repo["special-variables-types"]["patterns"].append(
                 {
                     "name": f"variable.language.special.{special}.vyper",
-                    "match": VyperLang.tmlanguage_match_functions % {"match": special},
+                    "match": VyperLang.tmlanguage_match_functions
+                    % {"match": special},
+                }
+            )
+        for special in VyperLang.special_attributes:
+            repo["special-variables-types"]["patterns"].append(
+                {
+                    "name": f"variable.language.special.{special}.vyper",
+                    "match": VyperLang.tmlanguage_match_wordboundary
+                    % {"match": special},
                 }
             )
         # link patterns
         # special-variables-vyper
-        for repo_item in ("expression-bare", "member-access-base", "item-name"):
+        for repo_item in (
+            "expression-bare",
+            "member-access-base",
+            "item-name",
+        ):
             repo[repo_item]["patterns"].append(
                 {"include": "#special-variables-types"},
             )
