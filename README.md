@@ -1,8 +1,7 @@
-[<img width="200" alt="get in touch with Consensys Diligence" src="https://user-images.githubusercontent.com/2865694/56826101-91dcf380-685b-11e9-937c-af49c2510aa0.png">](https://diligence.consensys.net)<br/>
+[<img height="71" alt="get in touch with Consensys Diligence" src="https://user-images.githubusercontent.com/2865694/56826101-91dcf380-685b-11e9-937c-af49c2510aa0.png">](https://consensys.io/diligence/) &nbsp; and &nbsp; [<img height="48" alt="get in touch with Consensys Diligence" src="https://github.com/tintinweb/vscode-vyper/assets/2865694/e627c8ef-79f5-4efc-acbc-8a70e1105af3">](https://www.chainsecurity.com)<br/>
 <sup>
-[[  🌐  ](https://diligence.consensys.net)  [  📩  ](mailto:diligence@consensys.net)  [  🔥  ](https://consensys.github.io/diligence/)]
+[[  🌐  ](https://consensys.io/diligence/)  [  📩  ](mailto:diligence@consensys.net)  [  🔥  ](https://consensys.io/diligence/research)]
 </sup><br/><br/>
-
 
 
 # vscode-Vyper    
@@ -97,6 +96,11 @@ Note: Active features can be disabled by setting `Settings` → `Vyper` → `Mod
 ## Release Notes
 
 see [CHANGELOG](./CHANGELOG.md)
+
+## Contact / Maintainer
+
+- [tintinweb](https://github.com/tintinweb) @ [Consensys Diligence](https://consensys.io/diligence/)
+- [trocher](https://github.com/trocher) @ [ChainSecurity](https://www.chainsecurity.com/)
 
 
 -----------------------------------------------------------------------------------------------------------
