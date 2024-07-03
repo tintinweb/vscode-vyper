@@ -1,0 +1,12 @@
+{
+    ".source.vyper": {
+        "natspec sample": {
+            "prefix": "natspec sample",
+            "body": "\"\"\"\n@author <tintinweb ;)>\n@notice <Determine if Bugs will accept `food` to eat>\n@dev <Compares the entire string and does not rely on a hash>\n@param <food The name of a food to evaluate (in English)>\n@return <true if Bugs will eat it, false otherwise>\n\"\"\"\n"
+        },
+        "natspec": {
+            "prefix": "natspec",
+            "body": "\"\"\"\n@author ${1:author}\n@notice ${2:notice}\n@dev ${3:dev}\n@param ${4:param}\n@return ${5:return}\n\"\"\"\n\t"
+        }
+    }
+}

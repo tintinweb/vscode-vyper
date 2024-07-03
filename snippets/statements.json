@@ -1,0 +1,33 @@
+{
+    ".source.vyper": {
+        "log event call": {
+            "prefix": "log",
+            "body": "log ${1:name}(${2:variable}, ${3:variable})"
+        },
+        "if statement": {
+            "prefix": "if",
+            "body": "if ${1:condition}: \n\t$2\n"
+        },
+        "if else statement": {
+            "prefix": "ifelse",
+            "body": "if ${1:condition}: \n\t$2\n else: \n\t$0\n"
+        },
+
+        "for array statement": {
+            "prefix": "forarray",
+            "body": "for ${1:name}: ${2:type} in ${3:array}:\n\t$0\n"
+        },
+        "range(end)": {
+            "prefix": "for range",
+            "body": "for ${1:name}: ${2:type} in range(${3:times}):\n\t$0\n"
+        },
+        "range(start, end)": {
+            "prefix": "for range",
+            "body": "for ${1:name}: ${2:type} in range(${3:start}, ${4:end}):\n\t$0\n"
+        },
+        "range(start, end, bound=)": {
+            "prefix": "for range",
+            "body": "for ${1:name}: ${2:type} in range(${3:start}, ${4:end}, bound=${5:bound}):\n\t$0\n"
+        }
+    }
+}

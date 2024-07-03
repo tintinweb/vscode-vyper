@@ -1,0 +1,12 @@
+{
+    ".source.vyper": {
+        "HashMap type": {
+            "prefix": "HashMap",
+            "body": "HashMap[${1:type}, ${2:type}]"
+        },
+        "DynArray type": {
+            "prefix": "DynArray",
+            "body": "DynArray[${1:type}, ${2:length}]"
+        }
+    }
+}

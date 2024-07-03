@@ -84,3 +84,9 @@ typings/
 .dynamodb/
 
 dist/**
+
+# VSCode
+.vscode/
+
+# OSX
+.DS_Store

@@ -26,13 +26,19 @@ var activeEditor;
 
 /** event funcs */
 async function onDidSave(document) {
-    if (document.languageId != settings.LANGUAGE_ID) {
-        console.log("langid mismatch");
-        return;
-    }
-
-    //always run on save
     if (settings.extensionConfig().compile.onSave) {
+
+        if (document.languageId != settings.LANGUAGE_ID) {
+            console.log("Language ID mismatch");
+            return;
+        }
+        const fileExtension = document.fileName.split('.').pop();
+        
+        if (fileExtension != "vy") {
+            console.log("Skipping compilation for interface file");
+            return;
+        }
+        //always run on save
         mod_compile.compileContractCommand(document);
     }
 }
@@ -45,21 +51,19 @@ async function onDidChange(event) {
     if(settings.extensionConfig().decoration.enable){
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"@\\b(public|payable|modifying|external)\\b",
+                regex:"^@\\b(public|modifying|nonpayable|payable|external|deploy)\\b",
                 captureGroup: 0,
             },
             {
-                regex:"\\b(send|raw_call|selfdestruct|raw_log|create_forwarder_to|blockhash)\\b",
+                regex:"\\b(send|raw_call|selfdestruct|create_forwarder_to|create_minimal_proxy_to|create_copy_of|create_from_blueprint)\\b",
                 captureGroup: 0,
                 hoverMessage: "❗**potentially unsafe** lowlevel call"
             },
-        ], mod_deco.styles.foreGroundWarning);
-        mod_deco.decorateWords(activeEditor, [
             {
-                regex:"\\b(public|payable|modifying|external)\\b\\(",
-                captureGroup: 1,
+                regex:"\\b(extcall|staticcall)\\b",
+                captureGroup: 0,
             },
-        ], mod_deco.styles.foreGroundWarningUnderline);
+        ], mod_deco.styles.foreGroundWarning);
         mod_deco.decorateWords(activeEditor, [
             {
                 regex:"\\b(\\.balance|msg\\.[\\w]+|block\\.[\\w]+)\\b",
@@ -68,7 +72,7 @@ async function onDidChange(event) {
         ], mod_deco.styles.foreGroundInfoUnderline);
         mod_deco.decorateWords(activeEditor, [
             {
-                regex:"@?\\b(private|nonreentrant|constant|internal|view|pure|event)\\b",
+                regex:"^@\\b(private|nonreentrant|constant|internal|view|pure|event)\\b",
                 captureGroup: 0,
             },
         ], mod_deco.styles.foreGroundOk);
@@ -112,7 +116,7 @@ function onActivate(context) {
         vscode.languages.setLanguageConfiguration(type, {
             onEnterRules: [
                 {
-                    beforeText: /^\s*(?:struct|def|class|for|if|elif|else|while|try|with|finally|except|async).*?:\s*$/,
+                    beforeText: /^\s*(?:struct|enum|flag|event|interface|def|class|for|if|elif|else).*?:\s*$/,
                     action: { indentAction: vscode.IndentAction.Indent }
                 }
             ]

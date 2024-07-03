@@ -68,7 +68,7 @@ async function decorateWords(editor, decorules, decoStyle) {
 
         decorules.forEach(function (rule) {
             //var regEx = new RegExp("\\b" +word+"\\b" ,"g");
-            var regEx = new RegExp(rule.regex, "g");
+            var regEx = new RegExp(rule.regex, "gm");
             let match;
             while (match = regEx.exec(text)) {
                 var startPos = editor.document.positionAt(match.index);

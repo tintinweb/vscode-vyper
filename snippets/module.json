@@ -1,0 +1,72 @@
+{
+    ".source.vyper": {
+        "struct declaration": {
+            "prefix": "struct",
+            "body": "struct ${1:name}:\n\t${2:name}: ${3:type}$0\n\t$0\n"
+        },
+        "event declaration": {
+            "prefix": "event",
+            "body": "event ${1:name}:\n\t${2:name}: ${3:type}\n\t${4:name}: ${5:type}"
+        },
+        "interface declaration": {
+            "prefix": "interface",
+            "body": "interface ${1:name}:\n\tdef ${2:name}() -> ${3:type}: nonpayable"
+        },
+        "constructor declaration": {
+            "prefix": ["@deploy", "__init__", "constructor", "init"],
+            "body": "@deploy\ndef __init__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "default function declaration": {
+            "prefix": ["fallback", "__default__", "default"],
+            "body": "@external\ndef __default__(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "function declaration": {
+            "prefix": ["@external", "def", "func"],
+            "body": "@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "payable function declaration": {
+            "prefix": ["@payable", "payable", "funcpay"],
+            "body": "@payable\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "external nonreentrant function declaration": {
+            "prefix": ["@nonreentrant", "nonreentrant", "funcnonreentrant"],
+            "body": "@nonreentrant\n@external\ndef ${2:name}(${3:_name}: ${4:type}):\n\t$0\n"
+        },
+        "external view function declaration": {
+            "prefix": ["@view", "view", "funcview"],
+            "body": "@view\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "external pure function declaration": {
+            "prefix": ["@pure", "pure", "funcpure"],
+            "body": "@pure\n@external\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "internal function declaration": {
+            "prefix": ["@internal", "internal", "funcint"],
+            "body": "@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "internal view function declaration": {
+            "prefix": ["@view", "view", "funcintview"],
+            "body": "@view\n@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "internal pure function declaration": {
+            "prefix": ["@pure", "pure", "funcintpure"],
+            "body": "@pure\n@internal\ndef ${1:name}(${2:_name}: ${3:type}):\n\t$0\n"
+        },
+        "variable declaration": {
+            "prefix": "vardec",
+            "body": "${1:name}: ${2:type}"
+        },
+        "public variable declaration": {
+            "prefix": "pubvardec",
+            "body": "${1:name}: public(${2:type})"
+        },
+        "constant declaration": {
+            "prefix": "constdec",
+            "body": "${1:NAME}: constant(${2:type}) = ${3:defaultValue}"
+        },
+        "interface implementation impl": {
+            "prefix": "implements",
+            "body": "implements: ${1:interface}"
+        }
+    }
+}
