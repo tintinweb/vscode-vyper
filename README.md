@@ -2,17 +2,19 @@
 <sup>
 [[  🌐  ](https://consensys.io/diligence/)  [  📩  ](mailto:diligence@consensys.net)  [  🔥  ](https://consensys.io/diligence/research)]
 </sup><br/><br/>
-
+[<img height="30" alt="vscode marketplace" src="https://github.com/user-attachments/assets/030dde14-1745-4f4e-852c-b415db9c2050">](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-vyper) [<img height="30" alt="open-vsx" src="https://github.com/user-attachments/assets/975d31ca-5259-4bf0-8c40-b2e25cdd5ccb">](https://open-vsx.org/extension/tintinweb/vscode-vyper) 
 
 # vscode-Vyper    
    
 ![img](./images/icon.png)
 
-Ethereum Vyper language support for Visual Studio Code
+Ethereum [Vyper](https://www.vyperlang.org/) Language Support for [Visual Studio Code](https://code.visualstudio.com/) & [VSCodium](https://vscodium.com/)
 
-[Marketplace](https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-vyper): `ext install tintinweb.vscode-vyper`
 
-<sup>Also available on [vscode.dev](https://vscode.dev)! (compilation not yet supported)</sup> 
+`ext install tintinweb.vscode-vyper`
+
+
+<sup>Vyper syntax also available on [vscode.dev](https://vscode.dev)!</sup> 
 
 ## Features
 
